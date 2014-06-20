@@ -1,0 +1,71 @@
+<!-- IF S_CODEBOX_PLUS_LOADED -->
+<div id="format-buttons">
+	<select name="addbbcode_codeboxplus" onchange="bbfontstyle('[Code=' + this.form.addbbcode_codeboxplus.options[this.form.addbbcode_codeboxplus.selectedIndex].value + ' file={L_CODEBOX_PLUS_DEFAULT_FILENAME}.' + this.form.addbbcode_codeboxplus.options[this.form.addbbcode_codeboxplus.selectedIndex].className.substring(9) + ']', '[/Code]');this.form.addbbcode_codeboxplus.selectedIndex = 0;" title="{L_SELECT} {L_CODE}">
+		<option value="0" selected="selected" style="display: none">{L_CODEBOX_PLUS_SELECT}</option>
+		<option value="text" class="code_etx_txt" title="Plain Text">TXT (Text)</option>
+		<option value="robots" class="code_etx_txt" title="Robots.txt">TXT (Robots.txt)</option>
+		<option value="ada" class="code_etx_ada" title="Ada">ADA</option>
+		<option value="autohotkey" class="code_etx_ahk" title="AutoHotKey">AHK (AutoHotKey)</option>
+		<option value="actionscript" class="code_etx_as" title="Flash ActionScript">AS (ActionScript)</option>
+		<option value="actionscript3" class="code_etx_as" title="Flash ActionScript 3">AS (ActionScript3)</option>
+		<option value="asm" class="code_etx_asm" title="Assembly">ASM (Assembly)</option>
+		<option value="asp" class="code_etx_asp" title="Active Server Pages">ASP</option>
+		<option value="autoit" class="code_etx_au3" title="AutoIT">AU3 (AutoIT)</option>
+		<option value="dos" class="code_etx_bat" title="DOS">BAT (DOS)</option>
+		<option value="bash" class="code_etx_bsh" title="UNIX Bash">BSH (Bash)</option>
+		<option value="c" class="code_etx_c" title="C">C</option>
+		<option value="cobol" class="code_etx_cbl" title="COmmon Business Oriented Language">CBL (COBOL)</option>
+		<option value="cmake" class="code_etx_cmake" title="CMakeFile">CMAKE</option>
+		<option value="coffeescript" class="code_etx_coffee" title="CoffeeScript">COFFEE</option>
+		<option value="cpp" class="code_etx_cpp" title="C++">CPP (C++)</option>
+		<option value="csharp" class="code_etx_cs" title="C#">CS (C#)</option>
+		<option value="css" class="code_etx_css" title="Cascade Style Sheets">CSS</option>
+		<option value="d" class="code_etx_d" title="D">D</option>
+		<option value="diff" class="code_etx_diff" title="Diff">DIFF</option>
+		<option value="fortran" class="code_etx_f" title="Fortran">F (Fortran)</option>
+		<option value="fsharp" class="code_etx_fs" title="F#">FS (FSharp)</option>
+		<option value="haskell" class="code_etx_hs" title="Haskell">HS (Haskell)</option>
+		<option value="apache" class="code_etx_htaccess" title="Apache">HTACCESS (Apache)</option>
+		<option value="html4strict" class="code_etx_html" title="HTML4 Strict">HTML (HTML4)</option>
+		<option value="html5" class="code_etx_html" title="HTML5">HTML (HTML5)</option>
+		<option value="ini" class="code_etx_ini" title="Windows Initialization">INI</option>
+		<option value="inno" class="code_etx_iss" title="Inno Setup Script">ISS (Inno)</option>
+		<option value="java" class="code_etx_java" title="Java">JAVA (Java)</option>
+		<option value="java5" class="code_etx_java" title="Java 5">JAVA (Java 5)</option>
+		<option value="javascript" class="code_etx_js" title="JavaScript">JS (JavaScript)</option>
+		<option value="jquery" class="code_etx_js" title="jQuery">JS (jQuery)</option>
+		<option value="kixtart" class="code_etx_kix" title="Kixtart">KIX (Kixtart)</option>
+		<option value="lua" class="code_etx_lua" title="Lua">LUA</option>
+		<option value="matlab" class="code_etx_m" title="MATrix LABoratory">M (MatLab)</option>
+		<option value="make" class="code_etx_make" title="MakeFile">MAKE</option>
+		<option value="nsis" class="code_etx_nsi" title="Nullsoft Scriptable Install System">NSI (NSIS)</option>
+		<option value="delphi" class="code_etx_pas" title="Delphi">PAS (Delphi)</option>
+		<option value="pascal" class="code_etx_pas" title="Pascal">PAS (Pascal)</option>
+		<option value="php" class="code_etx_php" title="PHP Hypertext Preprocessor">PHP</option>
+		<option value="php-brief" class="code_etx_php" title="PHP Hypertext Preprocessor">PHP (Brief)</option>
+		<option value="perl" class="code_etx_pl" title="Perl">PL (Perl)</option>
+		<option value="perl6" class="code_etx_pl" title="Perl 6">PL (Perl 6)</option>
+		<option value="pcre" class="code_etx_pl" title="PCRE - Perl Compatible Regular Expressions">PL (PCRE)</option>
+		<option value="properties" class="code_etx_properties" title="Properties">PROPERTIES</option>
+		<option value="powershell" class="code_etx_ps1" title="Windows PowerShell">PS1 (PowerShell)</option>
+		<option value="python" class="code_etx_py" title="Python">PY (Python)</option>
+		<option value="ruby" class="code_etx_rb" title="Ruby">RB (Ruby)</option>
+		<option value="reg" class="code_etx_reg" title="Windows Registry">REG (Registry)</option>
+		<option value="scheme" class="code_etx_scm" title="Scheme">SCM (Scheme)</option>
+		<option value="applescript" class="code_etx_scpt" title="AppleScript">SCPT (AppleScript)</option>
+		<option value="mysql" class="code_etx_sql" title="MySQL">SQL (MySQL)</option>
+		<option value="oracle8" class="code_etx_sql" title="Oracle 8">SQL (Oracle 8)</option>
+		<option value="oracle11" class="code_etx_sql" title="Oracle 11">SQL (Oracle 11)</option>
+		<option value="postgresql" class="code_etx_sql" title="PostgreSQL">SQL (PostgreSQL)</option>
+		<option value="sql" class="code_etx_sql" title="Structured Query Language">SQL (SQL)</option>
+		<option value="smalltalk" class="code_etx_st" title="SmallTalk">ST (SmallTalk)</option>
+		<option value="latex" class="code_etx_tex" title="LaTeX">TEX (LaTeX)</option>
+		<option value="verilog" class="code_etx_v" title="Verilog">V (Verilog)</option>
+		<option value="vbnet" class="code_etx_vb" title="VB.NET">VB (VB.NET)</option>
+		<option value="vb" class="code_etx_vb" title="Visual Basic">VB (VisualBasic)</option>
+		<option value="vhdl" class="code_etx_vhdl" title="VHSIC Hardware Description Language">VHDL (VHSIC)</option>
+		<option value="xml" class="code_etx_xml" title="eXtensible Markup Language">XML</option>
+		<option value="yaml" class="code_etx_yml" title="YAML Ain't Markup Language">YML (YAML)</option>
+	</select>
+</div>
+<!-- ENDIF -->
