@@ -11,13 +11,15 @@ https://www.phpbb.com/customise/db/author/o0johntam0o/
 
 ## Description
 
-Codebox Plus alow you to:
+Codebox Plus alows you to:
 
 * Syntax highlighting 200+ programming languages (using GeSHi)
 
 * Expand/collapse code block
 
 * Downloading code contents
+
+* 100% xHTML valid
 
 (Previous version: https://github.com/o0johntam0o/phpBB-Codebox-Plus)
 

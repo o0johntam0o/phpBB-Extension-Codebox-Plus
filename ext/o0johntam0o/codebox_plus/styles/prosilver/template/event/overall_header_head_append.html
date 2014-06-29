@@ -1,5 +1,65 @@
-<!-- IF S_CODEBOX_PLUS_LOADED -->
-	function ShowHideCodebox(a)
+<!-- IF CODEBOX_PLUS_AVAILABLE -->
+<style type="text/css">
+	.codebox_plus a
+	{
+		text-decoration: none;
+	}
+
+	dl.codebox_plus
+	{
+		padding: 3px;
+		background-color: #FFFFFF;
+		border: 1px solid #d8d8d8;
+		font-size: 1em;
+	}
+
+	dl.codebox_plus dt
+	{
+		text-transform: uppercase;
+		border-bottom: 1px solid #CCCCCC;
+		margin-bottom: 3px;
+		font-size: 0.8em;
+		font-weight: bold;
+		display: block;
+	}
+
+	blockquote dl.codebox_plus
+	{
+		margin-left: 0;
+	}
+
+	dl.codebox_plus code
+	{
+		overflow: auto;
+		display: block;
+		height: auto;
+		max-height: 200px;
+		white-space: normal;
+		padding-top: 5px;
+		font: 0.9em Monaco, "Andale Mono", "Courier New", Courier, mono;
+		line-height: 1.3em;
+		color: #8b8b8b;
+		margin: 2px 0;
+	}
+	
+	.codebox_plus code::-webkit-scrollbar
+	{
+		width: 8px;
+		height: 8px;
+		-webkit-appearance: none;
+		background: rgba(0, 0, 0, .1);
+		border-radius: 3px;
+	}
+	
+	.codebox_plus code::-webkit-scrollbar-thumb
+	{
+		background: rgba(0, 0, 0, .3);
+		border-radius: 3px;
+	}
+</style>
+
+<script type="text/javascript">
+	function showHideCodebox(a)
 	{
 		// Get ID of code block
 		var e = a.parentNode.parentNode.getElementsByTagName('DD')[0];
@@ -59,4 +119,5 @@
 			r.select();
 		}
 	}
+</script>
 <!-- ENDIF -->

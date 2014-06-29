@@ -16,7 +16,7 @@ class main_module
 	
 	function main($id, $mode)
 	{
-		global $user, $template, $config;
+		global $user, $template, $config, $request, $phpbb_log;
 
 		$this->tpl_name = 'acp_codebox_plus';
 		$this->page_title = $user->lang['CODEBOX_PLUS_TITLE_ACP'];

@@ -1,5 +1,5 @@
 <!-- INCLUDE overall_header.html -->
-
+<!-- IF CODEBOX_PLUS_AVAILABLE && CODEBOX_PLUS_DOWNLOAD_AVAILABLE -->
 <form action="{S_CODE_DOWNLOADER_ACTION}" method="post">
 <div class="panel">
 	<div class="inner"><span class="corners-top"><span></span></span>
@@ -20,5 +20,11 @@
 </div>
 {S_FORM_TOKEN}
 </form>
-
+<!-- ELSE -->
+<div id="information" class="rules">
+	<div class="inner">
+		<strong>{L_INFORMATION}{L_COLON}</strong> {L_NO_ACTION}
+	</div>
+</div>
+<!-- ENDIF -->
 <!-- INCLUDE overall_footer.html -->
