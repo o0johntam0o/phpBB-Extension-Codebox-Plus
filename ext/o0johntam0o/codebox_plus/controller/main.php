@@ -64,6 +64,19 @@ class main
 		{
 			redirect(append_sid("{$this->root_path}index.$this->php_ext"));
 		}
+		// Check permission
+		if($mode == 0)
+		{
+			$sql = 'SELECT forum_id FROM ' . POSTS_TABLE . ' WHERE post_id = ' . $id;
+			$result = $this->db->sql_query($sql);
+			$row = $this->db->sql_fetchrow($result);
+			$this->db->sql_freeresult($result);
+			
+			if (!$this->auth->acl_get('f_read', $row['forum_id']))
+			{
+				trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_NO_PERMISSION']);
+			}
+		}
 		// Login to download
 		if ($this->enable_login_required && !$this->user->data['is_registered'])
 		{
@@ -188,8 +201,8 @@ class main
 			
 			if ($code != '')
 			{
-				// Remove BBCodes & Smilies
-				$code = $this->codebox_clean_code($code, $post_data[$col_bbcode_uid]);
+				// Decode some special characters
+				$code = $this->codebox_decode_code($code);
 				
 				if ($code_data[1][$part] != '')
 				{
@@ -218,44 +231,24 @@ class main
 	}
 	
 	// From main_listener.php
-	private function codebox_clean_code($code = '', $bbcode_uid = '')
+	private function codebox_decode_code($code = '', $bbcode_uid = '')
 	{
-		if (strlen($code) == 0 || strlen($bbcode_uid) == 0)
+		if (strlen($code) == 0)
 		{
 			return $code;
 		}
-		// Email
-		$code = preg_replace('#<!-- e --><a href=\\\\"mailto:(?:.*?)\\\\">(.*?)</a><!-- e -->#msi', '$1', $code);
-		// Smilies - a bit of change
-		$code = preg_replace('#<!-- s(.*?) --><img src=\\"{SMILIES_PATH}/(?:.*?)\\" /><!-- s(?:.*?) -->#msi', '$1', $code);
-		// To prevent -> [CODE1][CODE2]TEXT[/CODE2][/CODE1]
-		// BBCodes with no param
-		$code = preg_replace('#\[b:' . $bbcode_uid . '\](.*?)\[/b:' . $bbcode_uid . '\]#msi', '[b]$1[/b]', $code);
-		$code = preg_replace('#\[i:' . $bbcode_uid . '\](.*?)\[/i:' . $bbcode_uid . '\]#msi', '[i]$1[/i]', $code);
-		$code = preg_replace('#\[u:' . $bbcode_uid . '\](.*?)\[/u:' . $bbcode_uid . '\]#msi', '[u]$1[/u]', $code);
-		$code = preg_replace('#\[img:' . $bbcode_uid . '\](.*?)\[/img:' . $bbcode_uid . '\]#msi', '[img]$1[/img]', $code);
-		$code = preg_replace('#\[\*:' . $bbcode_uid . '\](.*?)\[/\*:' . $bbcode_uid . '\]#msi', '[*]$1[/*]', $code);
-		$code = preg_replace('#\[code:' . $bbcode_uid . '\](.*?)\[/code:' . $bbcode_uid . '\]#msi', '[code]$1[/code]', $code);
-		$code = preg_replace('#\[quote:' . $bbcode_uid . '\](.*?)\[/quote:' . $bbcode_uid . '\]#msi', '[quote]$1[/quote]', $code);
-		$code = preg_replace('#\[url:' . $bbcode_uid . '\](.*?)\[/url:' . $bbcode_uid . '\]#msi', '[url]$1[/url]', $code);
-		$code = preg_replace('#\[list:' . $bbcode_uid . '\](.*?)\[/list:u:' . $bbcode_uid . '\]#msi', '[list]$1[/list]', $code);
-		// BBCodes with params
-		$code = preg_replace('#\[code=([a-z]+):' . $bbcode_uid . '\](.*?)\[/code:' . $bbcode_uid . '\]#msi', '[code=$1]$2[/code]', $code);
-		$code = preg_replace('#\[quote=&quot;(.*?)&quot;:' . $bbcode_uid . '\](.*?)\[/quote:' . $bbcode_uid . '\]#msi', '[quote="$1"]$2[/quote]', $code);
-		$code = preg_replace('#\[url=(.*?):' . $bbcode_uid . '\](.*?)\[/url:' . $bbcode_uid . '\]#msi', '[url=$1]$2[/url]', $code);
-		$code = preg_replace('#\[list=([a-z0-9]|disc|circle|square):' . $bbcode_uid . '\](.*)\[/list:u:' . $bbcode_uid . '\]#msi', '[list=$1]$2[/list]', $code);
-		$code = preg_replace('#\[size=([\-\+]?\d+):' . $bbcode_uid . '\](.*?)\[/size:' . $bbcode_uid . '\]#msi', '[size=$1]$2[/size]', $code);
-		$code = preg_replace('!\[color=(#[0-9a-f]{3}|#[0-9a-f]{6}|[a-z\-]+):' . $bbcode_uid . '\](.*?)\[/color:' . $bbcode_uid . '\]!msi', '[color=$1]$2[/color]', $code);
-		$code = preg_replace('#\[flash=([0-9]+,[0-9]+):' . $bbcode_uid . '\](.*?)\[/flash:' . $bbcode_uid . '\]#msi', '[flash=$1]$2[/flash]', $code);
-		$code = preg_replace('#\[attachment=([0-9]+):' . $bbcode_uid . '\]<(?:.*?)>(.*?)<(?:.*?)>\[/attachment:' . $bbcode_uid . '\]#msi', '[attachment=$1]$2[/attachment]', $code);
-		// A trouble with [CODE=PHP][/CODE]
-		$code = preg_replace('#<(.*?)>#msi', '', $code);
-		$code = preg_replace('#&nbsp;#msi', ' ', $code);
-		// Some characters was encoded before. We have to decode it
-		$str_from = array('<br />', '\"', '&lt;', '&gt;', '&#91;', '&#93;', '&#40;', '&#41;', '&#46;', '&#58;', '&#058;', '&#39;', '&#039;', '&quot;', '&amp;');
-		$str_to = array("\n", '"', '<', '>', '[', ']', '(', ')', '.', ':', ':', "'", "'", '"', '&');
+		// Changed \\\" to \\"
+		$str_from = array('\\"', '&lt;', '&gt;', '&#91;', '&#93;', '&#40;', '&#41;', '&#46;', '&#58;', '&#058;', '&#39;', '&#039;', '&quot;', '&amp;');
+		$str_to = array('"', '<', '>', '[', ']', '(', ')', '.', ':', ':', "'", "'", '"', '&');
 		$code = str_replace($str_from, $str_to, $code);
 		
-		return $code;
+		if (strlen($bbcode_uid) == 0)
+		{
+			return $code;
+		}
+		else
+		{
+			return '[code:' . $bbcode_uid . ']' . $code . '[/code:' . $bbcode_uid . ']';
+		}
 	}
 }

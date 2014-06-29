@@ -19,7 +19,6 @@ services:
             - @template
             - @user
             - @config
-            - @request
             - %core.root_path%
             - %core.php_ext%
         tags:

@@ -20,16 +20,16 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class main_listener implements EventSubscriberInterface
 {
-	protected $helper, $template, $user, $config, $request, $root_path, $php_ext;
+	protected $helper, $template, $user, $config, $root_path, $php_ext;
 	protected $codebox_plus_enabled, $download_enabled, $find, $find_code, $find_lang, $find_file;
 	
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\config\config $config, \phpbb\request\request $request, $root_path, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\config\config $config, $root_path, $php_ext)
 	{
 		$this->helper = $helper;
 		$this->template = $template;
 		$this->user = $user;
 		$this->config = $config;
-		$this->request = $request;
+		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 		
 		$this->codebox_plus_enabled = isset($this->config['codebox_plus_enable']) ? $this->config['codebox_plus_enable'] : 0;
@@ -41,7 +41,7 @@ class main_listener implements EventSubscriberInterface
         return array(
             'core.user_setup'						=> 'load_language_on_setup',
             'core.viewtopic_post_rowset_data'		=> 'viewtopic_correct_download_link',
-            'core.memberlist_view_profile'			=> 'memberlist_correct_download_link',
+            'core.modify_submit_post_data'			=> 'posting_modify_input',
         );
     }
 	
@@ -70,16 +70,11 @@ class main_listener implements EventSubscriberInterface
     }
 
 	/*
-	* Require: ($this->codebox_plus_enabled == true)
-	* POST & SIGNATURE => OK
+	* Event: core.viewtopic_post_rowset_data (viewtopic.php)
+	* POST & SIGNATURE
 	*/
     public function viewtopic_correct_download_link($event)
     {
-		if (!$this->codebox_plus_enabled)
-		{
-			return;
-		}
-		
 		// POSTS <<<<<<<<
 		if (isset($event['rowset_data']))
 		{
@@ -92,7 +87,15 @@ class main_listener implements EventSubscriberInterface
 			while (preg_match("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msi", $post_text))
 			{
 				$part++;
-				$post_text = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_template('\$2', '\$0', '\$1', \$this->helper->route('codebox_plus_download_controller', array('mode' => 0, 'id' => \$post_id, 'part' => \$part)), \$bbcode_uid)", $post_text, 1);
+				
+				if ($this->codebox_plus_enabled)
+				{
+					$post_text = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_template('\$0', '\$1', '\$2', \$bbcode_uid, 0, \$post_id, \$part)", $post_text, 1);
+				}
+				else
+				{
+					$post_text = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_decode_code('\$2', \$bbcode_uid)", $post_text, 1);
+				}
 			}
 			
 			if (isset($rowset_data['post_text']) && $part > 0)
@@ -114,7 +117,15 @@ class main_listener implements EventSubscriberInterface
 			while (preg_match("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $user_sig_bbcode_uid . "\](.*?)\[/codebox:" . $user_sig_bbcode_uid . "\]#msi", $user_sig))
 			{
 				$part++;
-				$user_sig = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $user_sig_bbcode_uid . "\](.*?)\[/codebox:" . $user_sig_bbcode_uid . "\]#msie", "\$this->codebox_template('\$2', '\$0', '\$1', \$this->helper->route('codebox_plus_download_controller', array('mode' => 2, 'id' => \$user_id, 'part' => \$part)), \$user_sig_bbcode_uid)", $user_sig, 1);
+				
+				if ($this->codebox_plus_enabled)
+				{
+					$user_sig = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $user_sig_bbcode_uid . "\](.*?)\[/codebox:" . $user_sig_bbcode_uid . "\]#msie", "\$this->codebox_template('\$0', '\$1', '\$2', \$user_sig_bbcode_uid, 2, \$user_id, \$part)", $user_sig, 1);
+				}
+				else
+				{
+					$user_sig = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $user_sig_bbcode_uid . "\](.*?)\[/codebox:" . $user_sig_bbcode_uid . "\]#msie", "\$this->codebox_decode_code('\$2', \$user_sig_bbcode_uid)", $user_sig, 1);
+				}
 			}
 			
 			if (isset($row['user_sig']) && $part > 0)
@@ -126,69 +137,61 @@ class main_listener implements EventSubscriberInterface
 	}
 	
 	/*
-	* Require: ($this->codebox_plus_enabled == true)
+	* Event: TODO
 	* SIGNATURE
 	*/
 	public function memberlist_correct_download_link($event)
 	{
-		if (!$this->codebox_plus_enabled)
-		{
-			return;
-		}
-		
-		if (isset($event['member']))
-		{
-			$member = $event['member'];
-			$user_sig = isset($member['user_sig']) ? $member['user_sig'] : '';
-			$user_sig_bbcode_uid = isset($member['user_sig_bbcode_uid']) ? $member['user_sig_bbcode_uid'] : '';
-			//$user_id = $this->request->variable('u', 0);
-			$user_id = isset($member['user_id']) ? $member['user_id'] : 0;
-			$part = 0;
-			
-			while (preg_match("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $user_sig_bbcode_uid . "\](.*?)\[/codebox:" . $user_sig_bbcode_uid . "\]#msi", $user_sig))
-			{
-				$part++;
-				$user_sig = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $user_sig_bbcode_uid . "\](.*?)\[/codebox:" . $user_sig_bbcode_uid . "\]#msie", "\$this->codebox_template('\$2', '\$0', '\$1', \$this->helper->route('codebox_plus_download_controller', array('mode' => 2, 'id' => \$user_id, 'part' => \$part)), \$user_sig_bbcode_uid)", $user_sig, 1);
-			}
-			
-			if (isset($member['user_sig']) && $part > 0)
-			{
-				$member['user_sig'] = $user_sig;
-				$event['member'] = $member;
-			}
-		}
+		return;
 	}
 	
 	/*
-	* Require: ($this->codebox_plus_enabled == true)
+	* Event: TODO
 	* MESSAGE & SIGNATURE
 	*/
 	public function ucp_correct_download_link($event)
 	{
-		if (!$this->codebox_plus_enabled)
-		{
-			return;
-		}
+		return;
 	}
 	
 	/*
-	* Require: ($this->codebox_plus_enabled == true)
+	* Event: TODO
 	* REVIEW & POST & SIGNATURE
 	*/
 	public function posting_correct_download_link($event)
 	{
-		if (!$this->codebox_plus_enabled)
+		return;
+    }
+	
+	/*
+	* Event: core.modify_submit_post_data (includes/functions_posting.php)
+	* Use: $this->codebox_clean_code()
+	* Generate text for storage
+	*/
+	public function posting_modify_input($event)
+	{
+		if (isset($event['data']))
 		{
-			return;
+			// REQUEST
+			$data = $event['data'];
+			$message = $data['message'];
+			$bbcode_uid = $data['bbcode_uid'];
+			// MODIFY
+			$message = preg_replace("#(\[codebox=[a-z0-9_-]+ file=(?:.*?):" . $bbcode_uid . "\])(.*?)(\[/codebox:" . $bbcode_uid . "\])#msie", "'\$1' . \$this->codebox_clean_code('\$2', \$bbcode_uid) . '\$3'", $message);
+			// RETURN
+			$data['message'] = $message;
+			$event['data'] = $data;
+			$event['update_message'] = true;
 		}
     }
 	
 	/*
-	* Return: Template
+	* Use: $this->codebox_parse_code(), $this->codebox_decode_code()
+	* Generate text for display
 	*/
-	public function codebox_template($code = '', $lang = '', $file = '', $link = '', $bbcode_uid = '')
+	public function codebox_template($lang = '', $file = '', $code = '', $bbcode_uid = '', $mode = 0, $id = 0, $part = 0)
 	{
-		if (strlen($code) == 0 || strlen($lang) == 0 || strlen($file) == 0 || strlen($link) == 0 || strlen($bbcode_uid) == 0)
+		if (strlen($lang) == 0 || strlen($file) == 0 || strlen($code) == 0 || strlen($bbcode_uid) == 0 || $id == 0 || $part == 0)
 		{
 			return '';
 		}
@@ -201,18 +204,18 @@ class main_listener implements EventSubscriberInterface
 		
 		if ($this->download_enabled)
 		{
-			$re .= '<a href="' . $link . '" onclick="window.open(this.href); return false;">';
+			$re .= '<a href="' . $this->helper->route('codebox_plus_download_controller', array('mode' => $mode, 'id' => $id, 'part' => $part)) . '" onclick="window.open(this.href); return false;">';
 			$re .= '[' . $this->user->lang['CODEBOX_PLUS_DOWNLOAD'] . ']</a> ' . '('. $file . ')';
 		}
 		
-		$re .= '</dt><dd>' . $this->codebox_parse_code($code, $lang, $bbcode_uid);
+		$re .= '</dt><dd>' . $this->codebox_parse_code($this->codebox_decode_code($code), $lang, $bbcode_uid);
 		$re .= '</dd><dd style="text-align:right; border-top:solid 1px #cccccc;"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/mod/codebox_plus/">Codebox Plus</a></dd></dl>';
 		
 		return $re;
 	}
 	
 	/*
-	* Return: Code
+	* Syntax highlighter
 	*/
 	private function codebox_parse_code($code = '', $lang = '', $bbcode_uid = '')
 	{
@@ -226,13 +229,10 @@ class main_listener implements EventSubscriberInterface
 			$code = substr($code, 1);
 		}
 		
-		// Remove BBCodes & Smilies
-		$code = $this->codebox_clean_code($code, $bbcode_uid);
-		
 		// GeSHi
 		if (!class_exists("GeSHi"))
 		{
-			include($this->root_path . 'ext/o0johntam0o/codebox_plus/includes/geshi/geshi.php');
+			include($this->root_path . 'ext/o0johntam0o/codebox_plus/includes/geshi/geshi.' . $this->php_ext);
 		}
 		
 		$geshi = new \GeSHi($code, $lang);
@@ -240,13 +240,37 @@ class main_listener implements EventSubscriberInterface
 		$geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 		$geshi->set_line_style('margin-left:20px;', false);
 		$geshi->set_code_style('border-bottom: dotted 1px #cccccc; font-size:100%;', false);
-		$code = str_replace("\n", "", $geshi->parse_code());
+		$code = $geshi->parse_code();
 		
 		return $code;
 	}
 	
 	/*
-	* Return: Code
+	* Decode some special characters
+	*/
+	private function codebox_decode_code($code = '', $bbcode_uid = '')
+	{
+		if (strlen($code) == 0)
+		{
+			return $code;
+		}
+		
+		$str_from = array('\\\"', '&lt;', '&gt;', '&#91;', '&#93;', '&#40;', '&#41;', '&#46;', '&#58;', '&#058;', '&#39;', '&#039;', '&quot;', '&amp;');
+		$str_to = array('"', '<', '>', '[', ']', '(', ')', '.', ':', ':', "'", "'", '"', '&');
+		$code = str_replace($str_from, $str_to, $code);
+		
+		if (strlen($bbcode_uid) == 0)
+		{
+			return $code;
+		}
+		else
+		{
+			return '[code:' . $bbcode_uid . ']' . $code . '[/code:' . $bbcode_uid . ']';
+		}
+	}
+	
+	/*
+	* Remove BBCodes UID & Smilies & Emails
 	*/
 	private function codebox_clean_code($code = '', $bbcode_uid = '')
 	{
@@ -254,37 +278,17 @@ class main_listener implements EventSubscriberInterface
 		{
 			return $code;
 		}
+		
 		// Email
 		$code = preg_replace('#<!-- e --><a href=\\\\"mailto:(?:.*?)\\\\">(.*?)</a><!-- e -->#msi', '$1', $code);
 		// Smilies
 		$code = preg_replace('#<!-- s(.*?) --><img src=\\\\"{SMILIES_PATH}/(?:.*?)\\\\" /><!-- s(?:.*?) -->#msi', '$1', $code);
-		// To prevent -> [CODE1][CODE2]TEXT[/CODE2][/CODE1]
-		// BBCodes with no param
-		$code = preg_replace('#\[b:' . $bbcode_uid . '\](.*?)\[/b:' . $bbcode_uid . '\]#msi', '[b]$1[/b]', $code);
-		$code = preg_replace('#\[i:' . $bbcode_uid . '\](.*?)\[/i:' . $bbcode_uid . '\]#msi', '[i]$1[/i]', $code);
-		$code = preg_replace('#\[u:' . $bbcode_uid . '\](.*?)\[/u:' . $bbcode_uid . '\]#msi', '[u]$1[/u]', $code);
-		$code = preg_replace('#\[img:' . $bbcode_uid . '\](.*?)\[/img:' . $bbcode_uid . '\]#msi', '[img]$1[/img]', $code);
-		$code = preg_replace('#\[\*:' . $bbcode_uid . '\](.*?)\[/\*:' . $bbcode_uid . '\]#msi', '[*]$1[/*]', $code);
-		$code = preg_replace('#\[code:' . $bbcode_uid . '\](.*?)\[/code:' . $bbcode_uid . '\]#msi', '[code]$1[/code]', $code);
-		$code = preg_replace('#\[quote:' . $bbcode_uid . '\](.*?)\[/quote:' . $bbcode_uid . '\]#msi', '[quote]$1[/quote]', $code);
-		$code = preg_replace('#\[url:' . $bbcode_uid . '\](.*?)\[/url:' . $bbcode_uid . '\]#msi', '[url]$1[/url]', $code);
-		$code = preg_replace('#\[list:' . $bbcode_uid . '\](.*?)\[/list:u:' . $bbcode_uid . '\]#msi', '[list]$1[/list]', $code);
-		// BBCodes with params
-		$code = preg_replace('#\[code=([a-z]+):' . $bbcode_uid . '\](.*?)\[/code:' . $bbcode_uid . '\]#msi', '[code=$1]$2[/code]', $code);
-		$code = preg_replace('#\[quote=&quot;(.*?)&quot;:' . $bbcode_uid . '\](.*?)\[/quote:' . $bbcode_uid . '\]#msi', '[quote="$1"]$2[/quote]', $code);
-		$code = preg_replace('#\[url=(.*?):' . $bbcode_uid . '\](.*?)\[/url:' . $bbcode_uid . '\]#msi', '[url=$1]$2[/url]', $code);
-		$code = preg_replace('#\[list=([a-z0-9]|disc|circle|square):' . $bbcode_uid . '\](.*)\[/list:u:' . $bbcode_uid . '\]#msi', '[list=$1]$2[/list]', $code);
-		$code = preg_replace('#\[size=([\-\+]?\d+):' . $bbcode_uid . '\](.*?)\[/size:' . $bbcode_uid . '\]#msi', '[size=$1]$2[/size]', $code);
-		$code = preg_replace('!\[color=(#[0-9a-f]{3}|#[0-9a-f]{6}|[a-z\-]+):' . $bbcode_uid . '\](.*?)\[/color:' . $bbcode_uid . '\]!msi', '[color=$1]$2[/color]', $code);
-		$code = preg_replace('#\[flash=([0-9]+,[0-9]+):' . $bbcode_uid . '\](.*?)\[/flash:' . $bbcode_uid . '\]#msi', '[flash=$1]$2[/flash]', $code);
-		$code = preg_replace('#\[attachment=([0-9]+):' . $bbcode_uid . '\]<(?:.*?)>(.*?)<(?:.*?)>\[/attachment:' . $bbcode_uid . '\]#msi', '[attachment=$1]$2[/attachment]', $code);
-		// A trouble with [CODE=PHP][/CODE]
+		// BBCodes
+		$code = str_replace(':' . $bbcode_uid, '', $code);
+		// Trouble with BBCode [CODE]
+		$code = str_replace('<br />', "\n", $code);
+		$code = str_replace('&nbsp;', ' ', $code);
 		$code = preg_replace('#<(.*?)>#msi', '', $code);
-		$code = preg_replace('#&nbsp;#msi', ' ', $code);
-		// Some characters was encoded before. We have to decode it
-		$str_from = array('<br />', '\"', '&lt;', '&gt;', '&#91;', '&#93;', '&#40;', '&#41;', '&#46;', '&#58;', '&#058;', '&#39;', '&#039;', '&quot;', '&amp;');
-		$str_to = array("\n", '"', '<', '>', '[', ']', '(', ')', '.', ':', ':', "'", "'", '"', '&');
-		$code = str_replace($str_from, $str_to, $code);
 		
 		return $code;
 	}

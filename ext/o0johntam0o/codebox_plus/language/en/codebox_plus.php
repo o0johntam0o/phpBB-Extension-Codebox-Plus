@@ -22,6 +22,7 @@ $lang = array_merge($lang, array(
 	'CODEBOX_PLUS_ERROR_CONFIRM'				=> 'You have exceeded the maximum number of submittion attempts for this session. Please try again later.',
 	'CODEBOX_PLUS_ERROR_CODEBOX_PLUS_DISABLED'	=> 'Codebox Plus MOD was disabled by the administrator',
 	'CODEBOX_PLUS_ERROR_DOWNLOAD_DISABLED'		=> 'Download function was disabled by the administrator',
+	'CODEBOX_PLUS_ERROR_NO_PERMISSION'			=> 'You do not have the necessary permissions to complete this operation',
 	'CODEBOX_PLUS_CONFIRM'						=> 'Please enter the confirmation code to download this file',
 	'CODEBOX_PLUS_CODE'							=> 'Code',
 	'CODEBOX_PLUS_DOWNLOAD'						=> 'Download',
