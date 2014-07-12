@@ -47,7 +47,7 @@ class main
 		return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 	}
 	
-	public function downloader($mode = 0, $id = 0, $part = 0)
+	public function downloader($id = 0, $part = 0)
 	{
 		// If Codebox Plus was disabled
 		if (!$this->enable_codebox_plus)
@@ -65,22 +65,19 @@ class main
 			redirect(append_sid("{$this->root_path}index.$this->php_ext"));
 		}
 		// Check permission
-		if($mode == 0)
+		$sql = 'SELECT forum_id FROM ' . POSTS_TABLE . ' WHERE post_id = ' . $id;
+		$result = $this->db->sql_query($sql);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+		
+		if (!$this->auth->acl_get('f_read', $row['forum_id']))
 		{
-			$sql = 'SELECT forum_id FROM ' . POSTS_TABLE . ' WHERE post_id = ' . $id;
-			$result = $this->db->sql_query($sql);
-			$row = $this->db->sql_fetchrow($result);
-			$this->db->sql_freeresult($result);
-			
-			if (!$this->auth->acl_get('f_read', $row['forum_id']))
-			{
-				trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_NO_PERMISSION']);
-			}
+			trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_NO_PERMISSION']);
 		}
 		// Login to download
 		if ($this->enable_login_required && !$this->user->data['is_registered'])
 		{
-			login_box($this->helper->route('codebox_plus_download_controller', array('mode' => $mode, 'id' => $id, 'part' => $part)), $this->user->lang['CODEBOX_PLUS_ERROR_LOGIN_REQUIRED']);
+			login_box($this->helper->route('codebox_plus_download_controller', array('id' => $id, 'part' => $part)), $this->user->lang['CODEBOX_PLUS_ERROR_LOGIN_REQUIRED']);
 		}
 		
 		// Captcha
@@ -102,7 +99,7 @@ class main
 				{
 					$captcha->reset();
 					// Everything is ok, start download
-					$this->codebox_output($mode, $id, $part);
+					$this->codebox_output($id, $part);
 					$ok = true;
 				}
 			}
@@ -117,7 +114,7 @@ class main
 				}
 				
 				$this->template->assign_vars(array(
-					'S_CODE_DOWNLOADER_ACTION'		=> $this->helper->route('codebox_plus_download_controller', array('mode' => $mode, 'id' => $id, 'part' => $part)),
+					'S_CODE_DOWNLOADER_ACTION'		=> $this->helper->route('codebox_plus_download_controller', array('id' => $id, 'part' => $part)),
 					'S_CONFIRM_CODE'                => true,
 					'CAPTCHA_TEMPLATE'              => $captcha->get_template(),
 				));
@@ -133,13 +130,13 @@ class main
 		else
 		{
 			// Everything is ok, start download
-			$this->codebox_output($mode, $id, $part);
+			$this->codebox_output($id, $part);
 			garbage_collection();
 			exit_handler();
 		}
 	}
 	
-	private function codebox_output($mode, $id, $part)
+	private function codebox_output($id = 0, $part = 0)
 	{
 		$id = (int) $id;
 		$part = (int) $part;
@@ -155,32 +152,8 @@ class main
 		}
 
 		// PROCESS REQUEST
-		//- Get post data
-		switch ($mode)
-		{
-			case 1:
-				$table = PRIVMSGS_TABLE;
-				$col_msg_id = 'msg_id';
-				$col_msg_text = 'message_text';
-				$col_bbcode_uid = 'bbcode_uid';
-			break;
-			
-			case 2:
-				$table = USERS_TABLE;
-				$col_msg_id = 'user_id';
-				$col_msg_text = 'user_sig';
-				$col_bbcode_uid = 'user_sig_bbcode_uid';
-			break;
-			
-			default:
-				$table = POSTS_TABLE;
-				$col_msg_id = 'post_id';
-				$col_msg_text = 'post_text';
-				$col_bbcode_uid = 'bbcode_uid';
-			break;
-		}
 
-		$sql = "SELECT $col_msg_text, $col_bbcode_uid FROM $table WHERE $col_msg_id = $id";
+		$sql = 'SELECT post_text, bbcode_uid FROM ' . POSTS_TABLE . ' WHERE post_id = ' . $id;
 		$result = $this->db->sql_query($sql);
 		$post_data = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
@@ -192,7 +165,7 @@ class main
 
 		//- Process post data
 		// Collect code
-		preg_match_all("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $post_data[$col_bbcode_uid] . "\](.*?)\[/codebox:" . $post_data[$col_bbcode_uid] . "\]#msi", $post_data[$col_msg_text], $code_data);
+		preg_match_all("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $post_data['bbcode_uid'] . "\](.*?)\[/codebox:" . $post_data['bbcode_uid'] . "\]#msi", $post_data['post_text'], $code_data);
 		
 		if (count($code_data[2]) >= $part)
 		{

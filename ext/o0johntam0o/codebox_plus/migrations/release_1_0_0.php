@@ -21,7 +21,8 @@ class release_1_0_0 extends \phpbb\db\migration\migration
     {
         return array('\phpbb\db\migration\data\v310\dev');
     }
-
+	
+	// INSTALL ==============================================================
     public function update_data()
     {
         return array(
@@ -53,9 +54,18 @@ class release_1_0_0 extends \phpbb\db\migration\migration
         );
     }
 	
+	// REMOVE ==============================================================
+	public function revert_data()
+	{
+		return array(
+			array('custom', array(array($this, 'remove_bbcode_codebox'))),
+		);
+	}
+	
+	// CUSTOM ==============================================================
 	public function install_bbcode_codebox()
 	{
-		$sql = 'SELECT bbcode_id FROM ' . $this->table_prefix . 'bbcodes WHERE LOWER(bbcode_tag) = "Codebox="';
+		$sql = 'SELECT bbcode_id FROM ' . $this->table_prefix . 'bbcodes WHERE LOWER(bbcode_tag) = "codebox="';
 		$result = $this->db->sql_query($sql);
 		$row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
@@ -102,5 +112,11 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				));
 			}
 		}
+	}
+	
+	public function remove_bbcode_codebox()
+	{
+		$sql = 'DELETE FROM ' . $this->table_prefix . 'bbcodes WHERE LOWER(bbcode_tag) = "codebox="';
+		$this->db->sql_query($sql);
 	}
 }

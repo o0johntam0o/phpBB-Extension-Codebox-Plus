@@ -40,8 +40,8 @@ class main_listener implements EventSubscriberInterface
     {
         return array(
             'core.user_setup'						=> 'load_language_on_setup',
-            'core.viewtopic_post_rowset_data'		=> 'viewtopic_correct_download_link',
             'core.modify_submit_post_data'			=> 'posting_modify_input',
+            'core.viewtopic_post_rowset_data'		=> 'viewtopic_correct_download_link',
         );
     }
 	
@@ -53,6 +53,13 @@ class main_listener implements EventSubscriberInterface
             'lang_set' => 'codebox_plus',
         );
         $event['lang_set_ext'] = $lang_set_ext;
+		
+		if ($this->user->page['page_name'] == 'posting.' . $this->php_ext)
+		{
+			$this->template->assign_vars(array(
+				'CODEBOX_PLUS_IN_POSTING'				=> true,
+			));
+		}
 		
 		if ($this->codebox_plus_enabled)
 		{
@@ -68,14 +75,20 @@ class main_listener implements EventSubscriberInterface
 			));
 		}
     }
-
+	
+	/*
+	* Event: TODO
+	*/
+	public function preview_correct_download_link($event)
+	{
+		return;
+    }
+	
 	/*
 	* Event: core.viewtopic_post_rowset_data (viewtopic.php)
-	* POST & SIGNATURE
 	*/
     public function viewtopic_correct_download_link($event)
     {
-		// POSTS <<<<<<<<
 		if (isset($event['rowset_data']))
 		{
 			$rowset_data = $event['rowset_data'];
@@ -90,7 +103,7 @@ class main_listener implements EventSubscriberInterface
 				
 				if ($this->codebox_plus_enabled)
 				{
-					$post_text = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_template('\$0', '\$1', '\$2', \$bbcode_uid, 0, \$post_id, \$part)", $post_text, 1);
+					$post_text = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_template('\$0', '\$1', '\$2', \$bbcode_uid, \$post_id, \$part)", $post_text, 1);
 				}
 				else
 				{
@@ -104,64 +117,15 @@ class main_listener implements EventSubscriberInterface
 				$event['rowset_data'] = $rowset_data;
 			}
 		}
-		
-		// SIGNATURE <<<<<<<<
-		if (isset($event['row']))
-		{
-			$row = $event['row'];
-			$user_sig = isset($row['user_sig']) ? $row['user_sig'] : '';
-			$user_sig_bbcode_uid = isset($row['user_sig_bbcode_uid']) ? $row['user_sig_bbcode_uid'] : '';
-			$user_id = isset($row['user_id']) ? $row['user_id'] : 0;
-			$part = 0;
-			
-			while (preg_match("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $user_sig_bbcode_uid . "\](.*?)\[/codebox:" . $user_sig_bbcode_uid . "\]#msi", $user_sig))
-			{
-				$part++;
-				
-				if ($this->codebox_plus_enabled)
-				{
-					$user_sig = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $user_sig_bbcode_uid . "\](.*?)\[/codebox:" . $user_sig_bbcode_uid . "\]#msie", "\$this->codebox_template('\$0', '\$1', '\$2', \$user_sig_bbcode_uid, 2, \$user_id, \$part)", $user_sig, 1);
-				}
-				else
-				{
-					$user_sig = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $user_sig_bbcode_uid . "\](.*?)\[/codebox:" . $user_sig_bbcode_uid . "\]#msie", "\$this->codebox_decode_code('\$2', \$user_sig_bbcode_uid)", $user_sig, 1);
-				}
-			}
-			
-			if (isset($row['user_sig']) && $part > 0)
-			{
-				$row['user_sig'] = $user_sig;
-				$event['row'] = $row;
-			}
-		}
 	}
 	
 	/*
 	* Event: TODO
-	* SIGNATURE
 	*/
-	public function memberlist_correct_download_link($event)
+	public function mcp_correct_download_link($event)
 	{
 		return;
 	}
-	
-	/*
-	* Event: TODO
-	* MESSAGE & SIGNATURE
-	*/
-	public function ucp_correct_download_link($event)
-	{
-		return;
-	}
-	
-	/*
-	* Event: TODO
-	* REVIEW & POST & SIGNATURE
-	*/
-	public function posting_correct_download_link($event)
-	{
-		return;
-    }
 	
 	/*
 	* Event: core.modify_submit_post_data (includes/functions_posting.php)
@@ -189,7 +153,7 @@ class main_listener implements EventSubscriberInterface
 	* Use: $this->codebox_parse_code(), $this->codebox_decode_code()
 	* Generate text for display
 	*/
-	public function codebox_template($lang = '', $file = '', $code = '', $bbcode_uid = '', $mode = 0, $id = 0, $part = 0)
+	public function codebox_template($lang = '', $file = '', $code = '', $bbcode_uid = '', $id = 0, $part = 0)
 	{
 		if (strlen($lang) == 0 || strlen($file) == 0 || strlen($code) == 0 || strlen($bbcode_uid) == 0 || $id == 0 || $part == 0)
 		{
@@ -204,7 +168,7 @@ class main_listener implements EventSubscriberInterface
 		
 		if ($this->download_enabled)
 		{
-			$re .= '<a href="' . $this->helper->route('codebox_plus_download_controller', array('mode' => $mode, 'id' => $id, 'part' => $part)) . '" onclick="window.open(this.href); return false;">';
+			$re .= '<a href="' . $this->helper->route('codebox_plus_download_controller', array('id' => $id, 'part' => $part)) . '" onclick="window.open(this.href); return false;">';
 			$re .= '[' . $this->user->lang['CODEBOX_PLUS_DOWNLOAD'] . ']</a> ' . '('. $file . ')';
 		}
 		

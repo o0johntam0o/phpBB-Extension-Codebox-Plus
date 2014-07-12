@@ -3,9 +3,8 @@ codebox_plus_base_controller:
     defaults: { _controller: o0johntam0o.codebox_plus.controller:base }
 
 codebox_plus_download_controller:
-    pattern: /codebox_plus/mode-{mode}/{id}-{part}
-    defaults: { _controller: o0johntam0o.codebox_plus.controller:downloader, mode:0, id:0, part:0 }
+    pattern: /codebox_plus/download/{id}-{part}
+    defaults: { _controller: o0johntam0o.codebox_plus.controller:downloader, id:0, part:0 }
     requirements:
-        mode: \d+
         id: \d+
         part: \d+
