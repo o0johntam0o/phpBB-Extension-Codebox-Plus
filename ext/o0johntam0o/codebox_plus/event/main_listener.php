@@ -41,7 +41,7 @@ class main_listener implements EventSubscriberInterface
         return array(
             'core.user_setup'						=> 'load_language_on_setup',
             'core.modify_submit_post_data'			=> 'posting_modify_input',
-            'core.viewtopic_post_rowset_data'		=> 'viewtopic_correct_download_link',
+            'core.viewtopic_post_rowset_data'		=> 'viewtopic_event',
         );
     }
 	
@@ -87,7 +87,7 @@ class main_listener implements EventSubscriberInterface
 	/*
 	* Event: core.viewtopic_post_rowset_data (viewtopic.php)
 	*/
-    public function viewtopic_correct_download_link($event)
+    public function viewtopic_event($event)
     {
 		if (isset($event['rowset_data']))
 		{
@@ -103,7 +103,7 @@ class main_listener implements EventSubscriberInterface
 				
 				if ($this->codebox_plus_enabled)
 				{
-					$post_text = preg_replace("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_template('\$0', '\$1', '\$2', \$bbcode_uid, \$post_id, \$part)", $post_text, 1);
+					$post_text = preg_replace("#\[codebox=([a-z0-9_-]+) file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_template('\$3', '\$1', '\$2', \$bbcode_uid, \$post_id, \$part)", $post_text, 1);
 				}
 				else
 				{
@@ -122,7 +122,7 @@ class main_listener implements EventSubscriberInterface
 	/*
 	* Event: TODO
 	*/
-	public function mcp_correct_download_link($event)
+	public function mcp_event($event)
 	{
 		return;
 	}
@@ -153,7 +153,7 @@ class main_listener implements EventSubscriberInterface
 	* Use: $this->codebox_parse_code(), $this->codebox_decode_code()
 	* Generate text for display
 	*/
-	public function codebox_template($lang = '', $file = '', $code = '', $bbcode_uid = '', $id = 0, $part = 0)
+	public function codebox_template($code = '', $lang = '', $file = '', $bbcode_uid = '', $id = 0, $part = 0)
 	{
 		if (strlen($lang) == 0 || strlen($file) == 0 || strlen($code) == 0 || strlen($bbcode_uid) == 0 || $id == 0 || $part == 0)
 		{
@@ -219,8 +219,8 @@ class main_listener implements EventSubscriberInterface
 			return $code;
 		}
 		
-		$str_from = array('\\\"', '&lt;', '&gt;', '&#91;', '&#93;', '&#40;', '&#41;', '&#46;', '&#58;', '&#058;', '&#39;', '&#039;', '&quot;', '&amp;');
-		$str_to = array('"', '<', '>', '[', ']', '(', ')', '.', ':', ':', "'", "'", '"', '&');
+		$str_from = array('&lt;', '&gt;', '&#91;', '&#93;', '&#40;', '&#41;', '&#46;', '&#58;', '&#058;', '&#39;', '&#039;', '&quot;', '&amp;');
+		$str_to = array('<', '>', '[', ']', '(', ')', '.', ':', ':', "'", "'", '"', '&');
 		$code = str_replace($str_from, $str_to, $code);
 		
 		if (strlen($bbcode_uid) == 0)
@@ -251,6 +251,7 @@ class main_listener implements EventSubscriberInterface
 		$code = str_replace(':' . $bbcode_uid, '', $code);
 		// Trouble with BBCode [CODE]
 		$code = str_replace('<br />', "\n", $code);
+		$code = str_replace('\\"', '&quot;', $code);
 		$code = str_replace('&nbsp;', ' ', $code);
 		$code = preg_replace('#<(.*?)>#msi', '', $code);
 		
