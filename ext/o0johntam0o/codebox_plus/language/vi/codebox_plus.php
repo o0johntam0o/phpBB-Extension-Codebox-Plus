@@ -30,9 +30,11 @@ $lang = array_merge($lang, array(
 	'CODEBOX_PLUS_COLLAPSE'						=> 'Thu hẹp',
 	'CODEBOX_PLUS_SELECT'						=> 'Chọn mã',
 	'CODEBOX_PLUS_DEFAULT_FILENAME'				=> 'Không tên',
+	'CODEBOX_PLUS_NO_PREVIEW'					=> 'Xem trước không khả dụng',
 	
-	'CODEBOX_PLUS_TITLE_ACP'					=> 'Codebox Plus Extension',
-	'CODEBOX_PLUS_TITLE'						=> 'Cài đặt tổng quát',
+	'CODEBOX_PLUS_TITLE'						=> 'Codebox Plus Extension',
+	'CODEBOX_PLUS_TITLE_SETTINGS'				=> 'Cài đặt tổng quát',
+	'CODEBOX_PLUS_WARNING'						=> 'KHÔNG ĐƯỢC CHỈNH SỬA BBCODE [CODEBOX=]',
 	'CODEBOX_PLUS_ENABLE'						=> 'Kích hoạt Codebox Plus',
 	'CODEBOX_PLUS_ENABLE_EXPLAIN'				=> 'Bạn có muốn sử dụng tùy chỉnh này ngay bây giờ?',
 	'CODEBOX_PLUS_ENABLE_DOWNLOAD'				=> 'Kích hoạt chức năng tải về',

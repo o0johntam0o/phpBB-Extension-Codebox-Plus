@@ -19,7 +19,7 @@ class main_module
 		global $user, $template, $config, $request, $phpbb_log;
 
 		$this->tpl_name = 'acp_codebox_plus';
-		$this->page_title = $user->lang['CODEBOX_PLUS_TITLE_ACP'];
+		$this->page_title = $user->lang['CODEBOX_PLUS_TITLE'];
 		add_form_key('o0johntam0o/acp_codebox_plus');
 
 		if ($request->is_set_post('submit'))

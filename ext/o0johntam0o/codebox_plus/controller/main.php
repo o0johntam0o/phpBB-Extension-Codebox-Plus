@@ -7,7 +7,7 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-// TODO: Improve anti-spam feature
+// TODO: IMPROVE ANTI-SPAM FEATURE
 namespace o0johntam0o\codebox_plus\controller;
 
 class main
@@ -15,7 +15,7 @@ class main
 	protected $enable_codebox_plus, $enable_download, $enable_login_required, $enable_prevent_bots, $enable_captcha, $max_attempt;
 	protected $helper, $template, $user, $config, $auth, $request, $db, $root_path, $php_ext;
 
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\config\config $config, \phpbb\auth\auth $auth, \phpbb\request\request $request, \phpbb\db\driver\driver $db, $root_path, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\config\config $config, \phpbb\auth\auth $auth, \phpbb\request\request $request, \phpbb\db\driver\driver_interface $db, $root_path, $php_ext)
 	{
 		$this->helper = $helper;
 		$this->template = $template;

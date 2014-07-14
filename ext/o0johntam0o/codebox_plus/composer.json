@@ -1,7 +1,7 @@
 {
 	"name": "o0johntam0o/codebox_plus",
 	"type": "phpbb-extension",
-	"description": "Syntax highlighting 200+ programming languages (using GeSHi); Expand/collapse code block; Downloading code contents",
+	"description": "Syntax highlighting 200+ programming languages (using GeSHi); Expand/collapse code block; Downloading code contents.",
 	"homepage": "https://github.com/o0johntam0o/phpBB-Extension-Codebox-Plus",
 	"version": "1.0.0",
 	"time": "2014-06-17",
@@ -10,15 +10,17 @@
 		{
 			"name": "Huynh Buu Tam",
 			"email": "o0johntam0o@gmail.com",
-			"homepage": "",
+			"homepage": "https://github.com/o0johntam0o",
 			"role": "Lead Developer"
 		}
 	],
 	"require": {
-		"php": ">=5.3.3",
-		"phpbb/phpbb": "3.1.*@dev"
+		"php": ">=5.3.3"
 	},
 	"extra": {
-		"display-name": "Codebox Plus"
+		"display-name": "Codebox Plus",
+		"soft-require": {
+			"phpbb/phpbb": "3.1.*@dev"
+		}
 	}
 }

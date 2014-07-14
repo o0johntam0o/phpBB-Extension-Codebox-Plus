@@ -16,13 +16,13 @@ class main_info
 	{
 		return array(
 			'filename'	=> '\o0johntam0o\codebox_plus\acp\main_module',
-			'title'		=> 'CODEBOX_PLUS_TITLE_ACP',
+			'title'		=> 'CODEBOX_PLUS_TITLE',
 			'version'	=> '1.0.0',
 			'modes'		=> array(
 				'config_codebox_plus'	=> array(
-					'title' => 'CODEBOX_PLUS_TITLE_ACP',
+					'title' => 'CODEBOX_PLUS_TITLE_SETTINGS',
 					'auth' => 'acl_a_board',
-					'cat' => array('CODEBOX_PLUS_TITLE_ACP')
+					'cat' => array('CODEBOX_PLUS_TITLE_SETTINGS')
 				),
 			),
 		);

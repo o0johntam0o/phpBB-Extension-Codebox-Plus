@@ -1,19 +1,15 @@
 <!-- IF CODEBOX_PLUS_AVAILABLE -->
 <style type="text/css">
-	.codebox_plus a
-	{
-		text-decoration: none;
-	}
-
-	dl.codebox_plus
+/* <![CDATA[ */
+	.codebox_plus_wrap
 	{
 		padding: 3px;
 		background-color: #FFFFFF;
-		border: 1px solid #d8d8d8;
+		border: 1px solid #D8D8D8;
 		font-size: 1em;
 	}
-
-	dl.codebox_plus dt
+	
+	.codebox_plus_header
 	{
 		text-transform: uppercase;
 		border-bottom: 1px solid #CCCCCC;
@@ -22,47 +18,31 @@
 		font-weight: bold;
 		display: block;
 	}
-
-	blockquote dl.codebox_plus
+	
+	.codebox_plus_footer
 	{
-		margin-left: 0;
-	}
-
-	dl.codebox_plus code
-	{
-		overflow: auto;
+		border-top: 1px solid #CCCCCC;
+		margin-top: 3px;
+		font-size: 0.8em;
 		display: block;
-		height: auto;
-		max-height: 200px;
-		white-space: normal;
-		padding-top: 5px;
-		font: 0.9em Monaco, "Andale Mono", "Courier New", Courier, mono;
-		line-height: 1.3em;
-		color: #8b8b8b;
-		margin: 2px 0;
+		text-align: right;
 	}
-	
-	.codebox_plus code::-webkit-scrollbar
-	{
-		width: 8px;
-		height: 8px;
-		-webkit-appearance: none;
-		background: rgba(0, 0, 0, .1);
-		border-radius: 3px;
-	}
-	
-	.codebox_plus code::-webkit-scrollbar-thumb
-	{
-		background: rgba(0, 0, 0, .3);
-		border-radius: 3px;
-	}
+/* ]]> */
 </style>
 
 <script type="text/javascript">
-	function showHideCodebox(a)
+/* <![CDATA[ */
+	function codebox_plus_toggle(a, tmp)
 	{
-		// Get ID of code block
-		var e = a.parentNode.parentNode.getElementsByTagName('DD')[0];
+		if (tmp)
+		{
+			var e = a.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0];
+		}
+		else
+		{
+			var e = a.parentNode.parentNode.getElementsByTagName('DD')[0];
+		}
+		
 		if (e.style.display == 'none')
 		{
 			e.style.display = 'inline';
@@ -73,10 +53,16 @@
 		}
 	}
 
-	function selectCodebox(a)
+	function codebox_plus_select(a, tmp)
 	{
-		// Get ID of code block
-		var e = a.parentNode.parentNode.getElementsByTagName('DD')[0];
+		if (tmp)
+		{
+			var e = a.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0];
+		}
+		else
+		{
+			var e = a.parentNode.parentNode.getElementsByTagName('DD')[0];
+		}
 
 		// Not IE and IE9+
 		if (window.getSelection)
@@ -119,5 +105,6 @@
 			r.select();
 		}
 	}
+/* ]]> */
 </script>
 <!-- ENDIF -->

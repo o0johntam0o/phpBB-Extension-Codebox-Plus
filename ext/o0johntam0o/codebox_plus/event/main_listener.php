@@ -7,7 +7,7 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-
+// TO-DO: VALIDATE HTML
 namespace o0johntam0o\codebox_plus\event;
 
 /**
@@ -39,9 +39,11 @@ class main_listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
     {
         return array(
-            'core.user_setup'						=> 'load_language_on_setup',
-            'core.modify_submit_post_data'			=> 'posting_modify_input',
-            'core.viewtopic_post_rowset_data'		=> 'viewtopic_event',
+            'core.user_setup'							=> 'load_language_on_setup',
+            'core.modify_submit_post_data'				=> 'posting_modify_input',
+            'core.posting_modify_template_vars'			=> 'posting_event',
+            'core.viewtopic_post_rowset_data'			=> 'viewtopic_event',
+            'core.modify_format_display_text_after'		=> 'message_parser_event',
         );
     }
 	
@@ -77,11 +79,38 @@ class main_listener implements EventSubscriberInterface
     }
 	
 	/*
-	* Event: TODO
+	* Event: core.modify_format_display_text_after (message_parser.php)
+	* Use: $this->codebox_template()
+	* Generate text for preview
 	*/
-	public function preview_correct_download_link($event)
+	public function message_parser_event($event)
 	{
-		return;
+		if (isset($event['text']))
+		{
+			$text = $event['text'];
+			$text = preg_replace('#' . preg_quote('<div class="codebox_plus_wrap"><div class="codebox_plus_header">') . '.*?' . preg_quote('<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/mod/codebox_plus/">Codebox Plus</a></div></div>') . '#msi', $this->codebox_template('NULL', 'NULL'), $text);
+			$event['text'] = $text;
+		}
+    }
+	
+	/*
+	* Event: core.posting_modify_template_vars (posting.php)
+	* Remove extra space before '[/code]'
+	*/
+	public function posting_event($event)
+	{
+		if (isset($event['page_data']))
+		{
+			$page_data = $event['page_data'];
+			$message = $page_data['MESSAGE'];
+			$message = str_replace(' [/code]', '[/code]', $message);
+			
+			if (isset($page_data['MESSAGE']))
+			{
+				$page_data['MESSAGE'] = $message;
+				$event['page_data'] = $page_data;
+			}
+		}
     }
 	
 	/*
@@ -103,7 +132,7 @@ class main_listener implements EventSubscriberInterface
 				
 				if ($this->codebox_plus_enabled)
 				{
-					$post_text = preg_replace("#\[codebox=([a-z0-9_-]+) file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_template('\$3', '\$1', '\$2', \$bbcode_uid, \$post_id, \$part)", $post_text, 1);
+					$post_text = preg_replace("#\[codebox=([a-z0-9_-]+) file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_template('\$3', '\$1', '\$2', \$post_id, \$part)", $post_text, 1);
 				}
 				else
 				{
@@ -117,14 +146,6 @@ class main_listener implements EventSubscriberInterface
 				$event['rowset_data'] = $rowset_data;
 			}
 		}
-	}
-	
-	/*
-	* Event: TODO
-	*/
-	public function mcp_event($event)
-	{
-		return;
 	}
 	
 	/*
@@ -153,27 +174,43 @@ class main_listener implements EventSubscriberInterface
 	* Use: $this->codebox_parse_code(), $this->codebox_decode_code()
 	* Generate text for display
 	*/
-	public function codebox_template($code = '', $lang = '', $file = '', $bbcode_uid = '', $id = 0, $part = 0)
+	public function codebox_template($code = '', $lang = 'text', $file = '', $id = 0, $part = 0)
 	{
-		if (strlen($lang) == 0 || strlen($file) == 0 || strlen($code) == 0 || strlen($bbcode_uid) == 0 || $id == 0 || $part == 0)
+		if (strlen($code) == 0)
 		{
 			return '';
 		}
 		
-		$re = '<dl class="codebox_plus"><dt><b>' . $this->user->lang['CODEBOX_PLUS_CODE'] . ':</b> ';
-		$re .= '<a href="#" onclick="selectCodebox(this); return false;">';
-		$re .= '[' . $this->user->lang['SELECT_ALL_CODE'] . ']';
-		$re .= '</a> <a href="#" onclick="showHideCodebox(this); return false;">';
-		$re .= '[' . $this->user->lang['CODEBOX_PLUS_EXPAND'] . '/' . $this->user->lang['CODEBOX_PLUS_COLLAPSE'] . ']</a> ';
-		
-		if ($this->download_enabled)
+		if (strlen($file) == 0)
 		{
-			$re .= '<a href="' . $this->helper->route('codebox_plus_download_controller', array('id' => $id, 'part' => $part)) . '" onclick="window.open(this.href); return false;">';
+			$file = $this->user->lang['CODEBOX_PLUS_DEFAULT_FILENAME'] . 'txt';
+		}
+		
+		$re = '<div class="codebox_plus_wrap"><div class="codebox_plus_header">';
+		$re .= '<strong>' . $this->user->lang['CODEBOX_PLUS_CODE'] . ': </strong>';
+		$re .= '<a href="#" onclick="codebox_plus_select(this, 1); return false;">[' . $this->user->lang['SELECT_ALL_CODE'] . ']</a>';
+		$re .= '&nbsp;<a href="#" onclick="codebox_plus_toggle(this, 1); return false;">[' . $this->user->lang['CODEBOX_PLUS_EXPAND'] . '/' . $this->user->lang['CODEBOX_PLUS_COLLAPSE'] . ']</a>';
+		
+		if ($this->download_enabled && $lang != 'NULL')
+		{
+			$re .= '&nbsp;<a href="' . $this->helper->route('codebox_plus_download_controller', array('id' => $id, 'part' => $part)) . '" onclick="window.open(this.href); return false;">';
 			$re .= '[' . $this->user->lang['CODEBOX_PLUS_DOWNLOAD'] . ']</a> ' . '('. $file . ')';
 		}
 		
-		$re .= '</dt><dd>' . $this->codebox_parse_code($this->codebox_decode_code($code), $lang, $bbcode_uid);
-		$re .= '</dd><dd style="text-align:right; border-top:solid 1px #cccccc;"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/mod/codebox_plus/">Codebox Plus</a></dd></dl>';
+		$re .= '</div>';
+		$re .= '<div><div style="display: none;">';
+		
+		if ($lang != 'NULL')
+		{
+			$re .= $this->codebox_parse_code($this->codebox_decode_code($code), $lang);
+		}
+		else
+		{
+			$re .= $this->user->lang['CODEBOX_PLUS_NO_PREVIEW'];
+		}
+		
+		$re .= '</div></div>';
+		$re .= '<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/mod/codebox_plus/">Codebox Plus</a></div></div>';
 		
 		return $re;
 	}
@@ -181,11 +218,11 @@ class main_listener implements EventSubscriberInterface
 	/*
 	* Syntax highlighter
 	*/
-	private function codebox_parse_code($code = '', $lang = '', $bbcode_uid = '')
+	private function codebox_parse_code($code = '', $lang = 'text')
 	{
-		if (strlen($code) == 0 || strlen($lang) == 0 || strlen($bbcode_uid) == 0)
+		if (strlen($code) == 0)
 		{
-			return $code;
+			return '';
 		}
 		// Remove newline at the beginning
 		if (!empty($code) && $code[0] == "\n")
@@ -202,9 +239,11 @@ class main_listener implements EventSubscriberInterface
 		$geshi = new \GeSHi($code, $lang);
 		$geshi->set_header_type(GESHI_HEADER_DIV);
 		$geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
+		$geshi->enable_keyword_links(false);
 		$geshi->set_line_style('margin-left:20px;', false);
-		$geshi->set_code_style('border-bottom: dotted 1px #cccccc; font-size:100%;', false);
-		$code = $geshi->parse_code();
+		$geshi->set_code_style('border-bottom: dotted 1px #cccccc;', false);
+		$geshi->set_line_ending("\n");
+		$code = str_replace("\n", "", $geshi->parse_code());
 		
 		return $code;
 	}
@@ -248,6 +287,9 @@ class main_listener implements EventSubscriberInterface
 		// Smilies
 		$code = preg_replace('#<!-- s(.*?) --><img src=\\\\"{SMILIES_PATH}/(?:.*?)\\\\" /><!-- s(?:.*?) -->#msi', '$1', $code);
 		// BBCodes
+		$code = str_replace(':o:' . $bbcode_uid, '', $code);
+		$code = str_replace(':u:' . $bbcode_uid, '', $code);
+		$code = str_replace(':m:' . $bbcode_uid, '', $code);
 		$code = str_replace(':' . $bbcode_uid, '', $code);
 		// Trouble with BBCode [CODE]
 		$code = str_replace('<br />', "\n", $code);

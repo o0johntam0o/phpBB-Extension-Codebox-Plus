@@ -30,9 +30,11 @@ $lang = array_merge($lang, array(
 	'CODEBOX_PLUS_COLLAPSE'						=> 'Collapse',
 	'CODEBOX_PLUS_SELECT'						=> 'Select code',
 	'CODEBOX_PLUS_DEFAULT_FILENAME'				=> 'Untitled',
+	'CODEBOX_PLUS_NO_PREVIEW'					=> 'Preview is not available',
 	
-	'CODEBOX_PLUS_TITLE_ACP'					=> 'Codebox Plus Extension',
-	'CODEBOX_PLUS_TITLE'						=> 'Codebox Plus Settings',
+	'CODEBOX_PLUS_TITLE'						=> 'Codebox Plus Extension',
+	'CODEBOX_PLUS_TITLE_SETTINGS'				=> 'General settings',
+	'CODEBOX_PLUS_WARNING'						=> 'DO NOT MODIFY THE BBCODE [CODEBOX=]',
 	'CODEBOX_PLUS_ENABLE'						=> 'Enable Codebox Plus',
 	'CODEBOX_PLUS_ENABLE_EXPLAIN'				=> 'Do you want to use this mod now?',
 	'CODEBOX_PLUS_ENABLE_DOWNLOAD'				=> 'Enable download feature',
