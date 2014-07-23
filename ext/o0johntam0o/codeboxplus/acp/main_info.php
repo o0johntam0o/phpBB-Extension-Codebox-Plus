@@ -8,14 +8,14 @@
 *
 */
 
-namespace o0johntam0o\codebox_plus\acp;
+namespace o0johntam0o\codeboxplus\acp;
 
 class main_info
 {
 	function module()
 	{
 		return array(
-			'filename'	=> '\o0johntam0o\codebox_plus\acp\main_module',
+			'filename'	=> '\o0johntam0o\codeboxplus\acp\main_module',
 			'title'		=> 'CODEBOX_PLUS_TITLE',
 			'version'	=> '1.0.0',
 			'modes'		=> array(

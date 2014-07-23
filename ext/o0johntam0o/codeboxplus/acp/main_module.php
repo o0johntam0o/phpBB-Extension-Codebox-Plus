@@ -8,7 +8,7 @@
 *
 */
 
-namespace o0johntam0o\codebox_plus\acp;
+namespace o0johntam0o\codeboxplus\acp;
 
 class main_module
 {

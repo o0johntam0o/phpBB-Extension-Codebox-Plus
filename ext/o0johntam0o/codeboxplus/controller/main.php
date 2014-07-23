@@ -8,7 +8,7 @@
 *
 */
 // TODO: IMPROVE ANTI-SPAM FEATURE
-namespace o0johntam0o\codebox_plus\controller;
+namespace o0johntam0o\codeboxplus\controller;
 
 class main
 {

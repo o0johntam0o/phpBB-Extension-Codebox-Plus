@@ -8,7 +8,7 @@
 *
 */
 
-namespace o0johntam0o\codebox_plus;
+namespace o0johntam0o\codeboxplus;
 
 /**
 * @ignore

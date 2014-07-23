@@ -8,7 +8,7 @@
 *
 */
 // TO-DO: VALIDATE HTML
-namespace o0johntam0o\codebox_plus\event;
+namespace o0johntam0o\codeboxplus\event;
 
 /**
 * @ignore
@@ -51,7 +51,7 @@ class main_listener implements EventSubscriberInterface
     {
         $lang_set_ext = $event['lang_set_ext'];
         $lang_set_ext[] = array(
-            'ext_name' => 'o0johntam0o/codebox_plus',
+            'ext_name' => 'o0johntam0o/codeboxplus',
             'lang_set' => 'codebox_plus',
         );
         $event['lang_set_ext'] = $lang_set_ext;
@@ -233,7 +233,7 @@ class main_listener implements EventSubscriberInterface
 		// GeSHi
 		if (!class_exists("GeSHi"))
 		{
-			include($this->root_path . 'ext/o0johntam0o/codebox_plus/includes/geshi/geshi.' . $this->php_ext);
+			include($this->root_path . 'ext/o0johntam0o/codeboxplus/includes/geshi/geshi.' . $this->php_ext);
 		}
 		
 		$geshi = new \GeSHi($code, $lang);

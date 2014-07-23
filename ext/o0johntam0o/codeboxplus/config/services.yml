@@ -1,6 +1,6 @@
 services:
-    o0johntam0o.codebox_plus.controller:
-        class: o0johntam0o\codebox_plus\controller\main
+    o0johntam0o.codeboxplus.controller:
+        class: o0johntam0o\codeboxplus\controller\main
         arguments:
             - @controller.helper
             - @template
@@ -12,8 +12,8 @@ services:
             - %core.root_path%
             - %core.php_ext%
 
-    o0johntam0o.codebox_plus.listener:
-        class: o0johntam0o\codebox_plus\event\main_listener
+    o0johntam0o.codeboxplus.listener:
+        class: o0johntam0o\codeboxplus\event\main_listener
         arguments:
             - @controller.helper
             - @template
