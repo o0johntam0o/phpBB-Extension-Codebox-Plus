@@ -13,9 +13,9 @@ namespace o0johntam0o\codeboxplus\controller;
 class main
 {
 	protected $enable_codebox_plus, $enable_download, $enable_login_required, $enable_prevent_bots, $enable_captcha, $max_attempt;
-	protected $helper, $template, $user, $config, $auth, $request, $db, $root_path, $php_ext;
+	protected $helper, $template, $user, $config, $auth, $request, $db, $captcha, $root_path, $php_ext;
 
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\config\config $config, \phpbb\auth\auth $auth, \phpbb\request\request $request, \phpbb\db\driver\driver_interface $db, $root_path, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\config\config $config, \phpbb\auth\auth $auth, \phpbb\request\request $request, \phpbb\captcha\factory $captcha, \phpbb\db\driver\driver_interface $db, $root_path, $php_ext)
 	{
 		$this->helper = $helper;
 		$this->template = $template;
@@ -24,6 +24,7 @@ class main
 		$this->auth = $auth;
 		$this->request = $request;
 		$this->db = $db;
+		$this->captcha = $captcha;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 		
@@ -81,23 +82,18 @@ class main
 		}
 		
 		// Captcha
-		if ($this->enable_captcha && $this->config['enable_confirm'])
+		if ($this->enable_captcha)
 		{
-			if (!class_exists('phpbb_captcha_factory'))
-			{
-				include("{$this->root_path}includes/captcha/captcha_factory.$this->php_ext");
-			}
-			
-			$captcha = \phpbb_captcha_factory::get_instance($this->config['captcha_plugin']);
-			$captcha->init(CONFIRM_POST);
+			$tmp_captcha = $this->captcha->get_instance($this->config['captcha_plugin']);
+			$tmp_captcha->init(CONFIRM_LOGIN);
 			$ok = false;
 			
 			if ($this->request->is_set_post('submit'))
 			{
-				$captcha->validate();
-				if ($captcha->is_solved())
+				$tmp_captcha->validate();
+				if ($tmp_captcha->is_solved())
 				{
-					$captcha->reset();
+					$tmp_captcha->reset();
 					// Everything is ok, start download
 					$this->codebox_output($id, $part);
 					$ok = true;
@@ -108,7 +104,7 @@ class main
 			if (!$ok)
 			{
 				// Too many request...
-				if ($captcha->get_attempt_count() >= $this->max_attempt)
+				if ($tmp_captcha->get_attempt_count() >= $this->max_attempt)
 				{
 					trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_CONFIRM']);
 				}
@@ -116,7 +112,7 @@ class main
 				$this->template->assign_vars(array(
 					'S_CODE_DOWNLOADER_ACTION'		=> $this->helper->route('codebox_plus_download_controller', array('id' => $id, 'part' => $part)),
 					'S_CONFIRM_CODE'                => true,
-					'CAPTCHA_TEMPLATE'              => $captcha->get_template(),
+					'CAPTCHA_TEMPLATE'              => $tmp_captcha->get_template(),
 				));
 
 				return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);

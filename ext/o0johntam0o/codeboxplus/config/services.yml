@@ -8,6 +8,7 @@ services:
             - @config
             - @auth
             - @request
+            - @captcha.factory
             - @dbal.conn
             - %core.root_path%
             - %core.php_ext%
