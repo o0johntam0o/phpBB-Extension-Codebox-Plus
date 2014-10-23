@@ -1,0 +1,28 @@
+<!-- INCLUDE overall_header.html -->
+<!-- IF CODEBOX_PLUS_AVAILABLE && CODEBOX_PLUS_DOWNLOAD_AVAILABLE -->
+<form action="{S_CODE_DOWNLOADER_ACTION}" method="post">
+	<table class="tablebg" width="100%" cellspacing="1">
+		<tr>
+			<td class="cat" <!-- IF not S_ADMIN_AUTH or S_CONFIRM_CODE -->colspan="2"<!-- ENDIF --> align="center"><span class="gensmall">{L_CODEBOX_PLUS_CONFIRM}</span></td>
+		</tr>
+		<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
+			<!-- DEFINE $CAPTCHA_TAB_INDEX = 1 -->
+			<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+		<!-- ENDIF -->
+		<tr>
+			<td class="cat" <!-- IF not S_ADMIN_AUTH or S_CONFIRM_CODE -->colspan="2"<!-- ENDIF --> align="center"><input type="submit" name="submit" class="btnmain" value="{L_SUBMIT}" tabindex="2" /></td>
+		</tr>
+	</table>
+	{S_FORM_TOKEN}
+</form>
+<!-- ELSE -->
+<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<th>{L_INFORMATION}</th>
+	</tr>
+	<tr>
+		<td>{L_NO_ACTION}</td>
+	</tr>
+</table>
+<!-- ENDIF -->
+<!-- INCLUDE overall_footer.html -->
