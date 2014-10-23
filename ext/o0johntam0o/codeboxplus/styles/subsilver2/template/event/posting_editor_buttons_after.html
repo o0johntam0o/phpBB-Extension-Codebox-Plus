@@ -1,6 +1,6 @@
 <!-- IF CODEBOX_PLUS_AVAILABLE && CODEBOX_PLUS_IN_POSTING -->
-<div id="format-buttons">
-	<select name="addbbcode_codeboxplus" onchange="bbfontstyle('[Codebox=' + this.form.addbbcode_codeboxplus.options[this.form.addbbcode_codeboxplus.selectedIndex].value + ' file={L_CODEBOX_PLUS_DEFAULT_FILENAME}.' + this.form.addbbcode_codeboxplus.options[this.form.addbbcode_codeboxplus.selectedIndex].className.substring(9) + ']', '[/Codebox]');this.form.addbbcode_codeboxplus.selectedIndex = 0;" title="{L_CODEBOX_PLUS_SELECT}">
+<div id="core-bbcode-buttons">
+	<select class="gensmall bbcode-size" name="addbbcode_codeboxplus" onchange="bbfontstyle('[Codebox=' + this.form.addbbcode_codeboxplus.options[this.form.addbbcode_codeboxplus.selectedIndex].value + ' file={L_CODEBOX_PLUS_DEFAULT_FILENAME}.' + this.form.addbbcode_codeboxplus.options[this.form.addbbcode_codeboxplus.selectedIndex].className.substring(9) + ']', '[/Codebox]');this.form.addbbcode_codeboxplus.selectedIndex = 0;" title="{L_CODEBOX_PLUS_SELECT}">
 		<option value="0" selected="selected" style="display: none">{L_CODEBOX_PLUS_SELECT}</option>
 		<option value="text" class="code_etx_txt" title="Plain Text">TXT (Text)</option>
 		<option value="robots" class="code_etx_txt" title="Robots.txt">TXT (Robots.txt)</option>
