@@ -1,4 +1,16 @@
 services:
+    o0johntam0o.codeboxplus.listener:
+        class: o0johntam0o\codeboxplus\event\main_listener
+        arguments:
+            - @controller.helper
+            - @template
+            - @user
+            - @config
+            - %core.root_path%
+            - %core.php_ext%
+        tags:
+            - { name: event.listener }
+
     o0johntam0o.codeboxplus.controller:
         class: o0johntam0o\codeboxplus\controller\main
         arguments:
@@ -12,15 +24,3 @@ services:
             - @dbal.conn
             - %core.root_path%
             - %core.php_ext%
-
-    o0johntam0o.codeboxplus.listener:
-        class: o0johntam0o\codeboxplus\event\main_listener
-        arguments:
-            - @controller.helper
-            - @template
-            - @user
-            - @config
-            - %core.root_path%
-            - %core.php_ext%
-        tags:
-            - { name: event.listener }

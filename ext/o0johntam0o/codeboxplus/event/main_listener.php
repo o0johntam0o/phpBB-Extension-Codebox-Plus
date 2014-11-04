@@ -1,18 +1,15 @@
 <?php
-
 /**
 *
-* @package phpBB Extension - Codebox Plus
+* Codebox Plus extension for the phpBB Forum Software package
+*
 * @copyright (c) 2014 o0johntam0o
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
-// TO-DO: VALIDATE HTML
+
 namespace o0johntam0o\codeboxplus\event;
 
-/**
-* @ignore
-*/
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -193,7 +190,7 @@ class main_listener implements EventSubscriberInterface
 		
 		if ($this->download_enabled && $lang != 'NULL')
 		{
-			$re .= '&nbsp;<a href="' . $this->helper->route('codebox_plus_download_controller', array('id' => $id, 'part' => $part)) . '" onclick="window.open(this.href); return false;">';
+			$re .= '&nbsp;<a href="' . $this->helper->route('o0johntam0o_codeboxplus_download_controller', array('id' => $id, 'part' => $part)) . '" onclick="window.open(this.href); return false;">';
 			$re .= '[' . $this->user->lang['CODEBOX_PLUS_DOWNLOAD'] . ']</a> ' . '('. $file . ')';
 		}
 		

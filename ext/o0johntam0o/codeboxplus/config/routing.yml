@@ -1,9 +1,9 @@
-codebox_plus_base_controller:
-    pattern: /codebox_plus
+o0johntam0o_codeboxplus_base_controller:
+    pattern: /codeboxplus
     defaults: { _controller: o0johntam0o.codeboxplus.controller:base }
 
-codebox_plus_download_controller:
-    pattern: /codebox_plus/download/{id}-{part}
+o0johntam0o_codeboxplus_download_controller:
+    pattern: /codeboxplus/download/{id}-{part}
     defaults: { _controller: o0johntam0o.codeboxplus.controller:downloader, id:0, part:0 }
     requirements:
         id: \d+

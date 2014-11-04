@@ -111,7 +111,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 	<div><div style="display: none;">
 		{TEXT}
 	</div></div>
-	<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/mod/codebox_plus/">Codebox Plus</a></div></div>',
+	<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/extension/codeboxplus/">Codebox Plus</a></div></div>',
 						'first_pass_match'		=> '!\[codebox\=([a-zA-Z0-9-+.,_ ]+) file\=([a-zA-Z0-9-+.,_ ]+)\](.*?)\[/codebox\]!ies',
 						'first_pass_replace'	=> '\'[codebox=${1} file=${2}:$uid]\'.str_replace(array("\r\n", \'\"\', \'\\\'\', \'(\', \')\'), array("\n", \'"\', \'&#39;\', \'&#40;\', \'&#41;\'), trim(\'${3}\')).\'[/codebox:$uid]\'',
 						'second_pass_match'		=> '!\[codebox\=([a-zA-Z0-9-+.,_ ]+) file\=([a-zA-Z0-9-+.,_ ]+):$uid\](.*?)\[/codebox:$uid\]!s',
@@ -123,7 +123,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 	<div><div style="display: none;">
 		${3}
 	</div></div>
-	<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/mod/codebox_plus/">Codebox Plus</a></div></div>'
+	<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/extension/codeboxplus/">Codebox Plus</a></div></div>'
 					)
 				));
 			}

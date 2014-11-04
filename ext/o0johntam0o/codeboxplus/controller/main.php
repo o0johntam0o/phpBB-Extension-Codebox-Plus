@@ -1,13 +1,13 @@
 <?php
-
 /**
 *
-* @package phpBB Extension - Codebox Plus
+* Codebox Plus extension for the phpBB Forum Software package
+*
 * @copyright (c) 2014 o0johntam0o
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
-// TODO: IMPROVE ANTI-SPAM FEATURE
+
 namespace o0johntam0o\codeboxplus\controller;
 
 class main
@@ -78,7 +78,7 @@ class main
 		// Login to download
 		if ($this->enable_login_required && !$this->user->data['is_registered'])
 		{
-			login_box($this->helper->route('codebox_plus_download_controller', array('id' => $id, 'part' => $part)), $this->user->lang['CODEBOX_PLUS_ERROR_LOGIN_REQUIRED']);
+			login_box($this->helper->route('o0johntam0o_codeboxplus_download_controller', array('id' => $id, 'part' => $part)), $this->user->lang['CODEBOX_PLUS_ERROR_LOGIN_REQUIRED']);
 		}
 		
 		// Captcha
@@ -110,7 +110,7 @@ class main
 				}
 				
 				$this->template->assign_vars(array(
-					'S_CODE_DOWNLOADER_ACTION'		=> $this->helper->route('codebox_plus_download_controller', array('id' => $id, 'part' => $part)),
+					'S_CODE_DOWNLOADER_ACTION'		=> $this->helper->route('o0johntam0o_codeboxplus_download_controller', array('id' => $id, 'part' => $part)),
 					'S_CONFIRM_CODE'                => true,
 					'CAPTCHA_TEMPLATE'              => $tmp_captcha->get_template(),
 				));
