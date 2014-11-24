@@ -19,8 +19,6 @@ Codebox Plus alows you to:
 
 * Downloading code contents
 
-* 100% xHTML valid
-
 (Previous version: https://github.com/o0johntam0o/phpBB-Codebox-Plus)
 
 ## Requirement

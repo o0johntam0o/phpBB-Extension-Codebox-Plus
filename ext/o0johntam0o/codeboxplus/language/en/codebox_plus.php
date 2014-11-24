@@ -41,7 +41,7 @@ $lang = array_merge($lang, array(
 	'CODEBOX_PLUS_NO_PREVIEW'					=> 'Preview is not available',
 	
 	'CODEBOX_PLUS_TITLE'						=> 'Codebox Plus Extension',
-	'CODEBOX_PLUS_TITLE_SETTINGS'				=> 'General settings',
+	'CODEBOX_PLUS_TITLE_SETTINGS'				=> 'Settings',
 	'CODEBOX_PLUS_WARNING'						=> 'DO NOT MODIFY THE BBCODE [CODEBOX=]',
 	'CODEBOX_PLUS_ENABLE'						=> 'Enable Codebox Plus',
 	'CODEBOX_PLUS_ENABLE_EXPLAIN'				=> 'Do you want to use this mod now?',
