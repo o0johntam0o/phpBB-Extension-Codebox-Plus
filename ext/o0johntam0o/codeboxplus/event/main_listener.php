@@ -85,7 +85,7 @@ class main_listener implements EventSubscriberInterface
 		if (isset($event['text']))
 		{
 			$text = $event['text'];
-			$text = preg_replace('#' . preg_quote('<div class="codebox_plus_wrap"><div class="codebox_plus_header">') . '.*?' . preg_quote('<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/mod/codebox_plus/">Codebox Plus</a></div></div>') . '#msi', $this->codebox_template('NULL', 'NULL'), $text);
+			$text = preg_replace('#' . preg_quote('<div class="codebox_plus_wrap"><div class="codebox_plus_header">') . '.*?' . preg_quote('<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/extension/codeboxplus/">Codebox Plus</a></div></div>') . '#msi', $this->codebox_template('NULL', 'NULL'), $text);
 			$event['text'] = $text;
 		}
     }
@@ -207,7 +207,7 @@ class main_listener implements EventSubscriberInterface
 		}
 		
 		$re .= '</div></div>';
-		$re .= '<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/mod/codebox_plus/">Codebox Plus</a></div></div>';
+		$re .= '<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/extension/codeboxplus/">Codebox Plus</a></div></div>';
 		
 		return $re;
 	}
