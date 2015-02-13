@@ -20,7 +20,7 @@ class main_info
 			'modes'		=> array(
 				'config_codebox_plus'	=> array(
 					'title' => 'CODEBOX_PLUS_TITLE_SETTINGS',
-					'auth' => 'acl_a_board',
+					'auth' => 'ext_o0johntam0o/codeboxplus && acl_a_board',
 					'cat' => array('CODEBOX_PLUS_TITLE_SETTINGS')
 				),
 			),

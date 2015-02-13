@@ -3,8 +3,13 @@
 	"type": "phpbb-extension",
 	"description": "Syntax highlighting 200+ programming languages (using GeSHi); Expand/collapse code block; Downloading code contents.",
 	"homepage": "https://github.com/o0johntam0o/phpBB-Extension-Codebox-Plus",
-	"version": "1.0.0",
-	"keywords": ["o0johntam0o", "extension", "codeboxplus"],
+	"version": "2.0.0",
+	"keywords": [
+			"o0johntam0o",
+			"extension",
+			"codebox",
+			"plus"
+	],
 	"license": "GPL-2.0",
 	"authors": [
 		{
@@ -27,9 +32,9 @@
 			"phpbb/phpbb": ">=3.1.0,<3.2.*@dev"
 		},
 		"version-check": {
-			"host": "version.phpbb.com",
-			"directory": "/phpbb-extensions",
-			"filename": "codeboxplus_versions.json"
+			"host": "www.phpbb.com",
+			"directory": "/customise/db/extension/codeboxplus",
+			"filename": "version_check"
 		}
 	}
 }

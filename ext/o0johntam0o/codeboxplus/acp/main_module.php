@@ -56,7 +56,7 @@ class main_module
 				trigger_error('FORM_INVALID');
 			}
 			
-			$this->config->set('codebox_plus_enable', $request->variable('codebox_plus_enable', 0));
+			$this->config->set('codebox_plus_syntax_highlighting', $request->variable('codebox_plus_syntax_highlighting', 0));
 			$this->config->set('codebox_plus_download', $request->variable('codebox_plus_download', 0));
 			$this->config->set('codebox_plus_login_required', $request->variable('codebox_plus_login_required', 0));
 			$this->config->set('codebox_plus_prevent_bots', $request->variable('codebox_plus_prevent_bots', 0));
@@ -68,14 +68,14 @@ class main_module
 		}
 		
 		$this->template->assign_vars(array(
-			'U_ACTION'							=> $this->u_action,
-			'S_CODEBOX_PLUS_VERSION'			=> isset($this->config['codebox_plus_version']) ? $this->config['codebox_plus_version'] : 0,
-			'S_CODEBOX_PLUS_ENABLE'				=> isset($this->config['codebox_plus_enable']) ? $this->config['codebox_plus_enable'] : 0,
-			'S_CODEBOX_PLUS_DOWNLOAD'			=> isset($this->config['codebox_plus_download']) ? $this->config['codebox_plus_download'] : 0,
-			'S_CODEBOX_PLUS_LOGIN_REQUIRED'		=> isset($this->config['codebox_plus_login_required']) ? $this->config['codebox_plus_login_required'] : 0,
-			'S_CODEBOX_PLUS_PREVENT_BOTS'		=> isset($this->config['codebox_plus_prevent_bots']) ? $this->config['codebox_plus_prevent_bots'] : 0,
-			'S_CODEBOX_PLUS_CAPTCHA'			=> isset($this->config['codebox_plus_captcha']) ? $this->config['codebox_plus_captcha'] : 0,
-			'S_CODEBOX_PLUS_MAX_ATTEMPT'		=> isset($this->config['codebox_plus_max_attempt']) ? $this->config['codebox_plus_max_attempt'] : 0,
+			'U_ACTION'									=> $this->u_action,
+			'S_CODEBOX_PLUS_VERSION'					=> isset($this->config['codebox_plus_version']) ? $this->config['codebox_plus_version'] : 0,
+			'S_CODEBOX_PLUS_SYNTAX_HIGHLIGHTING'		=> isset($this->config['codebox_plus_syntax_highlighting']) ? $this->config['codebox_plus_syntax_highlighting'] : 0,
+			'S_CODEBOX_PLUS_DOWNLOAD'					=> isset($this->config['codebox_plus_download']) ? $this->config['codebox_plus_download'] : 0,
+			'S_CODEBOX_PLUS_LOGIN_REQUIRED'				=> isset($this->config['codebox_plus_login_required']) ? $this->config['codebox_plus_login_required'] : 0,
+			'S_CODEBOX_PLUS_PREVENT_BOTS'				=> isset($this->config['codebox_plus_prevent_bots']) ? $this->config['codebox_plus_prevent_bots'] : 0,
+			'S_CODEBOX_PLUS_CAPTCHA'					=> isset($this->config['codebox_plus_captcha']) ? $this->config['codebox_plus_captcha'] : 0,
+			'S_CODEBOX_PLUS_MAX_ATTEMPT'				=> isset($this->config['codebox_plus_max_attempt']) ? $this->config['codebox_plus_max_attempt'] : 0,
 		));
 	}
 }

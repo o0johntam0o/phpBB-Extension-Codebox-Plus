@@ -12,8 +12,31 @@ namespace o0johntam0o\codeboxplus\controller;
 
 class main
 {
-	protected $enable_codebox_plus, $enable_download, $enable_login_required, $enable_prevent_bots, $enable_captcha, $max_attempt;
-	protected $helper, $template, $user, $config, $auth, $request, $db, $captcha, $root_path, $php_ext;
+	/** @var \phpbb\controller\helper */
+	protected $helper;
+	/** @var \phpbb\template\template */
+	protected $template;
+	/** @var \phpbb\user */
+	protected $user;
+	/** @var \phpbb\config\config */
+	protected $config;
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+	/** @var \phpbb\request\request */
+	protected $request;
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+	protected $captcha;
+	/** @var string */
+	protected $root_path;
+	/** @var string */
+	protected $php_ext;
+	
+	protected $enable_download;
+	protected $enable_login_required;
+	protected $enable_prevent_bots;
+	protected $enable_captcha;
+	protected $max_attempt;
 
 	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\config\config $config, \phpbb\auth\auth $auth, \phpbb\request\request $request, \phpbb\captcha\factory $captcha, \phpbb\db\driver\driver_interface $db, $root_path, $php_ext)
 	{
@@ -31,7 +54,6 @@ class main
 		$this->user->session_begin();
 		$this->auth->acl($this->user->data);
 		
-		$this->enable_codebox_plus = isset($this->config['codebox_plus_enable']) ? $this->config['codebox_plus_enable'] : 0;
 		$this->enable_download = isset($this->config['codebox_plus_download']) ? $this->config['codebox_plus_download'] : 0;
 		$this->enable_login_required = isset($this->config['codebox_plus_login_required']) ? $this->config['codebox_plus_login_required'] : 0;
 		$this->enable_prevent_bots = isset($this->config['codebox_plus_prevent_bots']) ? $this->config['codebox_plus_prevent_bots'] : 0;
@@ -41,20 +63,11 @@ class main
 
 	public function base()
 	{
-		$this->template->assign_vars(array(
-			'CODEBOX_PLUS_AVAILABLE'				=> false,
-			));
-
 		return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 	}
 	
 	public function downloader($id = 0, $part = 0)
 	{
-		// If Codebox Plus was disabled
-		if (!$this->enable_codebox_plus)
-		{
-			trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_CODEBOX_PLUS_DISABLED']);
-		}
 		// If download function was disabled
 		if (!$this->enable_download)
 		{
@@ -200,7 +213,7 @@ class main
 	}
 	
 	// From main_listener.php
-	private function codebox_decode_code($code = '', $bbcode_uid = '')
+	private function codebox_decode_code($code = '')
 	{
 		if (strlen($code) == 0)
 		{
@@ -211,13 +224,6 @@ class main
 		$str_to = array('<', '>', '[', ']', '(', ')', '.', ':', ':', "'", "'", '"', '&');
 		$code = str_replace($str_from, $str_to, $code);
 		
-		if (strlen($bbcode_uid) == 0)
-		{
-			return $code;
-		}
-		else
-		{
-			return '[code:' . $bbcode_uid . ']' . $code . '[/code:' . $bbcode_uid . ']';
-		}
+		return $code;
 	}
 }

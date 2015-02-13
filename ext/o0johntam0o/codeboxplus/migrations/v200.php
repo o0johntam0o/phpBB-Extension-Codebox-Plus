@@ -10,27 +10,30 @@
 
 namespace o0johntam0o\codeboxplus\migrations;
 
-class release_1_0_0 extends \phpbb\db\migration\migration
+class v200 extends \phpbb\db\migration\migration
 {
+	public function effectively_installed()
+	{
+		return isset($this->config['codebox_plus_version']) && version_compare($this->config['codebox_plus_version'], '2.0.0', '>=');
+	}
+	
 	// INSTALL ==============================================================
 	public function update_data()
 	{
 		return array(
-			array('custom', array(array($this, 'install_bbcode_codebox'))),
+			array('config.add', array('codebox_plus_version', '2.0.0')),
 			
-			array('config.add', array('codebox_plus_enable', 1)),
+			array('config.add', array('codebox_plus_syntax_highlighting', 1)),
 			array('config.add', array('codebox_plus_download', 1)),
 			array('config.add', array('codebox_plus_login_required', 0)),
 			array('config.add', array('codebox_plus_prevent_bots', 1)),
 			array('config.add', array('codebox_plus_captcha', 1)),
 			array('config.add', array('codebox_plus_max_attempt', 3)),
-
 			array('module.add', array(
 				'acp',
 				'ACP_CAT_DOT_MODS',
 				'CODEBOX_PLUS_TITLE'
 			)),
-			
 			array('module.add', array(
 				'acp',
 				'CODEBOX_PLUS_TITLE',
@@ -39,16 +42,8 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 					'modes'             => array('config_codebox_plus'),
 				),
 			)),
-
-			array('config.add', array('codebox_plus_version', '1.0.0')),
-		);
-	}
-
-	// REMOVE ==============================================================
-	public function revert_data()
-	{
-		return array(
-			array('custom', array(array($this, 'remove_bbcode_codebox'))),
+			
+			array('custom', array(array($this, 'install_bbcode_codebox'))),
 		);
 	}
 
@@ -93,36 +88,14 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 						'bbcode_helpline'		=> '',
 						'display_on_posting'	=> 0,
 						'bbcode_match'			=> '[Codebox={SIMPLETEXT1} file={SIMPLETEXT2}]{TEXT}[/Codebox]',
-						'bbcode_tpl'			=> '<div class="codebox_plus_wrap"><div class="codebox_plus_header">
-		<strong>{L_CODEBOX_PLUS_CODE}: </strong>
-		<a href="#" onclick="codebox_plus_select(this, 1); return false;">[{L_SELECT_ALL_CODE}]</a>
-		&nbsp;<a href="#" onclick="codebox_plus_toggle(this, 1); return false;">[{L_CODEBOX_PLUS_EXPAND}/{L_CODEBOX_PLUS_COLLAPSE}]</a>
-	</div>
-	<div><div style="display: none;">
-		{TEXT}
-	</div></div>
-	<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/extension/codeboxplus/">Codebox Plus</a></div></div>',
+						'bbcode_tpl'			=> '<div class="codebox" title="Codebox Plus"><p>{L_CODE}{L_COLON} <a href="#" onclick="selectCode(this); return false;">{L_SELECT_ALL_CODE}</a></p><code>{TEXT}</code></div>',
 						'first_pass_match'		=> '!\[codebox\=([a-zA-Z0-9-+.,_ ]+) file\=([a-zA-Z0-9-+.,_ ]+)\](.*?)\[/codebox\]!ies',
-						'first_pass_replace'	=> '\'[codebox=${1} file=${2}:$uid]\'.str_replace(array("\r\n", \'\"\', \'\\\'\', \'(\', \')\'), array("\n", \'"\', \'&#39;\', \'&#40;\', \'&#41;\'), trim(\'${3}\')).\'[/codebox:$uid]\'',
+						'first_pass_replace'	=> '\'[codebox=${1} file=${2}:$uid]\'.str_replace(array("\\r\\n", \'\\"\', \'\\\'\', \'(\', \')\'), array("\\n", \'"\', \'&#39;\', \'&#40;\', \'&#41;\'), trim(\'${3}\')).\'[/codebox:$uid]\'',
 						'second_pass_match'		=> '!\[codebox\=([a-zA-Z0-9-+.,_ ]+) file\=([a-zA-Z0-9-+.,_ ]+):$uid\](.*?)\[/codebox:$uid\]!s',
-						'second_pass_replace'	=> '<div class="codebox_plus_wrap"><div class="codebox_plus_header">
-		<strong>{L_CODEBOX_PLUS_CODE}: </strong>
-		<a href="#" onclick="codebox_plus_select(this, 1); return false;">[{L_SELECT_ALL_CODE}]</a>
-		&nbsp;<a href="#" onclick="codebox_plus_toggle(this, 1); return false;">[{L_CODEBOX_PLUS_EXPAND}/{L_CODEBOX_PLUS_COLLAPSE}]</a>
-	</div>
-	<div><div style="display: none;">
-		${3}
-	</div></div>
-	<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/extension/codeboxplus/">Codebox Plus</a></div></div>'
+						'second_pass_replace'	=> '<div class="codebox" title="Codebox Plus"><p>{L_CODE}{L_COLON} <a href="#" onclick="selectCode(this); return false;">{L_SELECT_ALL_CODE}</a></p><code>${3}</code></div>'
 					)
 				));
 			}
 		}
-	}
-
-	public function remove_bbcode_codebox()
-	{
-		$sql = 'DELETE FROM ' . $this->table_prefix . 'bbcodes WHERE LOWER(bbcode_tag) = "codebox="';
-		$this->db->sql_query($sql);
 	}
 }
