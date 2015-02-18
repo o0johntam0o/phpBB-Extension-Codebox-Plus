@@ -1,13 +1,14 @@
 <?php
 /**
 *
-* Codebox Plus extension for the phpBB Forum Software package [British English]
+* Codebox Plus extension for the phpBB Forum Software package [German]
+* German translation by tas2580 (https://tas2580.net)
 *
 * @copyright (c) 2014 o0johntam0o
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
-* German translation by tas2580 (https://tas2580.net)
 */
+
 /**
 * DO NOT CHANGE
 */
@@ -15,10 +16,12 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
 }
+
 $lang = array_merge($lang, array(
 	'CODEBOX_PLUS_ERROR_GENERAL'				=> 'Allgemeiner Fehler',
 	'CODEBOX_PLUS_ERROR_POST_NOT_FOUND'			=> 'Beitrag nicht gefunden',

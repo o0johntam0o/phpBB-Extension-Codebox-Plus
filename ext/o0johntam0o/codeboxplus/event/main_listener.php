@@ -162,7 +162,6 @@ class main_listener implements EventSubscriberInterface
 			// RETURN
 			$data['message'] = $message;
 			$event['data'] = $data;
-			$event['update_message'] = true;
 		}
     }
 	
