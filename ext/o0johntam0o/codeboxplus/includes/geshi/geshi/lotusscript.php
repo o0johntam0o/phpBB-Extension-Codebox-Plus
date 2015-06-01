@@ -1,5 +1,13 @@
 <?php
 /**
+* DO NOT CHANGE
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
+/**
  * lotusscript.php
  * ------------------------
  * Author: Richard Civil (info@richardcivil.net)

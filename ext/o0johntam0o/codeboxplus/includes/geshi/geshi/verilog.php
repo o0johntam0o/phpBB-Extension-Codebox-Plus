@@ -1,5 +1,13 @@
 <?php
 /**
+* DO NOT CHANGE
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
+/**
  * verilog.php
  * -----------
  * Author: G�nter Dannoritzer <dannoritzer@web.de>

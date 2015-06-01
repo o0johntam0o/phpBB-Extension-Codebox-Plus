@@ -1,4 +1,14 @@
 <?php
+namespace o0johntam0o\codeboxplus\includes\geshi;
+
+/**
+* DO NOT CHANGE
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 /**
  * GeSHi - Generic Syntax Highlighter
  *
@@ -39,14 +49,6 @@
 // their values - you never know when a value may change in a future
 // version
 //
-
-/**
-* DO NOT CHANGE
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
 
 /** The version of this GeSHi file */
 define('GESHI_VERSION', '1.0.8.11');
@@ -4750,34 +4752,10 @@ class GeSHi {
     }
 } // End Class GeSHi
 
-
-if (!function_exists('geshi_highlight')) {
-    /**
-     * Easy way to highlight stuff. Behaves just like highlight_string
-     *
-     * @param string The code to highlight
-     * @param string The language to highlight the code in
-     * @param string The path to the language files. You can leave this blank if you need
-     *               as from version 1.0.7 the path should be automatically detected
-     * @param boolean Whether to return the result or to echo
-     * @return string The code highlighted (if $return is true)
-     * @since 1.0.2
-     */
-    function geshi_highlight($string, $language, $path = null, $return = false) {
-        $geshi = new GeSHi($string, $language, $path);
-        $geshi->set_header_type(GESHI_HEADER_NONE);
-
-        if ($return) {
-            return '<code>' . $geshi->parse_code() . '</code>';
-        }
-
-        echo '<code>' . $geshi->parse_code() . '</code>';
-
-        if ($geshi->error()) {
-            return false;
-        }
-        return true;
-    }
-}
+/*
+*
+* Function geshi_hignlight() was removed
+*
+*/
 
 ?>

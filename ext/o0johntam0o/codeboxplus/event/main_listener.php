@@ -228,12 +228,8 @@ class main_listener implements EventSubscriberInterface
 		if ($this->syntax_highlighting_enabled)
 		{
 			// GeSHi
-			if (!class_exists("GeSHi"))
-			{
-				include($this->root_path . 'ext/o0johntam0o/codeboxplus/includes/geshi/geshi.' . $this->php_ext);
-			}
-			
-			$geshi = new \GeSHi($code, $lang);
+			$geshi = new \o0johntam0o\codeboxplus\includes\geshi\GeSHi();
+			$geshi->GeSHi($code, $lang);
 			$geshi->set_header_type(GESHI_HEADER_DIV);
 			$geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 			$geshi->enable_keyword_links(false);
