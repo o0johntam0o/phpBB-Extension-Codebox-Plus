@@ -2,236 +2,236 @@
 <div id="core-bbcode-buttons">
 	<select class="gensmall bbcode-size" name="addbbcode_codeboxplus" onchange="bbfontstyle('[Codebox=' + this.form.addbbcode_codeboxplus.options[this.form.addbbcode_codeboxplus.selectedIndex].value + ' file={L_CODEBOX_PLUS_DEFAULT_FILENAME}.' + this.form.addbbcode_codeboxplus.options[this.form.addbbcode_codeboxplus.selectedIndex].className.substring(9) + ']', '[/Codebox]');this.form.addbbcode_codeboxplus.selectedIndex = 0;" title="{L_CODEBOX_PLUS_SELECT}">
 		<option value="0" selected="selected" style="display: none">{L_CODEBOX_PLUS_SELECT}</option>
-		<option value="text" class="code_etx_txt" title="Plain Text">TXT (Text)</option>
-		<option value="robots" class="code_etx_txt" title="Robots.txt">TXT (Robots.txt)</option>
-		<option value="asm" class="code_etx_asm" title="Assembly">ASM (Assembly)</option>
-		<option value="asp" class="code_etx_asp" title="Active Server Pages">ASP</option>
-		<option value="autoit" class="code_etx_au3" title="AutoIT">AU3 (AutoIT)</option>
-		<option value="dos" class="code_etx_bat" title="DOS">BAT (DOS)</option>
-		<option value="bash" class="code_etx_bsh" title="UNIX Bash">BSH (Bash)</option>
-		<option value="c" class="code_etx_c" title="C">C</option>
-		<option value="cobol" class="code_etx_cbl" title="COmmon Business Oriented Language">CBL (COBOL)</option>
-		<option value="cmake" class="code_etx_cmake" title="CMakeFile">CMAKE</option>
-		<option value="cpp" class="code_etx_cpp" title="C++">CPP (C++)</option>
-		<option value="csharp" class="code_etx_cs" title="C#">CS (C#)</option>
-		<option value="css" class="code_etx_css" title="Cascade Style Sheets">CSS</option>
-		<option value="html4strict" class="code_etx_html" title="HTML4 Strict">HTML (HTML4)</option>
-		<option value="html5" class="code_etx_html" title="HTML5">HTML (HTML5)</option>
-		<option value="ini" class="code_etx_ini" title="Windows Initialization">INI</option>
-		<option value="java" class="code_etx_java" title="Java">JAVA (Java)</option>
-		<option value="java5" class="code_etx_java" title="Java 5">JAVA (Java 5)</option>
-		<option value="javascript" class="code_etx_js" title="JavaScript">JS (JavaScript)</option>
-		<option value="jquery" class="code_etx_js" title="jQuery">JS (jQuery)</option>
-		<option value="lua" class="code_etx_lua" title="Lua">LUA</option>
-		<option value="matlab" class="code_etx_m" title="MATrix LABoratory">M (MatLab)</option>
-		<option value="make" class="code_etx_make" title="MakeFile">MAKE</option>
-		<option value="nsis" class="code_etx_nsi" title="Nullsoft Scriptable Install System">NSI (NSIS)</option>
-		<option value="delphi" class="code_etx_pas" title="Delphi">PAS (Delphi)</option>
-		<option value="pascal" class="code_etx_pas" title="Pascal">PAS (Pascal)</option>
-		<option value="php" class="code_etx_php" title="PHP Hypertext Preprocessor">PHP</option>
-		<option value="php-brief" class="code_etx_php" title="PHP Hypertext Preprocessor">PHP (Brief)</option>
-		<option value="perl" class="code_etx_pl" title="Perl">PL (Perl)</option>
-		<option value="perl6" class="code_etx_pl" title="Perl 6">PL (Perl 6)</option>
-		<option value="pcre" class="code_etx_pl" title="PCRE - Perl Compatible Regular Expressions">PL (PCRE)</option>
-		<option value="powershell" class="code_etx_ps1" title="Windows PowerShell">PS1 (PowerShell)</option>
-		<option value="python" class="code_etx_py" title="Python">PY (Python)</option>
-		<option value="ruby" class="code_etx_rb" title="Ruby">RB (Ruby)</option>
-		<option value="reg" class="code_etx_reg" title="Windows Registry">REG (Registry)</option>
-		<option value="mysql" class="code_etx_sql" title="MySQL">SQL (MySQL)</option>
-		<option value="oracle8" class="code_etx_sql" title="Oracle 8">SQL (Oracle 8)</option>
-		<option value="oracle11" class="code_etx_sql" title="Oracle 11">SQL (Oracle 11)</option>
-		<option value="postgresql" class="code_etx_sql" title="PostgreSQL">SQL (PostgreSQL)</option>
-		<option value="sql" class="code_etx_sql" title="Structured Query Language">SQL (SQL)</option>
-		<option value="latex" class="code_etx_tex" title="LaTeX">TEX (LaTeX)</option>
-		<option value="verilog" class="code_etx_v" title="Verilog">V (Verilog)</option>
-		<option value="vbnet" class="code_etx_vb" title="VB.NET">VB (VB.NET)</option>
-		<option value="vb" class="code_etx_vb" title="Visual Basic">VB (VisualBasic)</option>
-		<option value="xml" class="code_etx_xml" title="eXtensible Markup Language">XML</option>
-		<option value="yaml" class="code_etx_yml" title="YAML Ain't Markup Language">YML (YAML)</option>
-		<option value="text" class="code_etx_txt" title="">--------- [0-9] ---------</option>
-		<option value="4cs" class="code_etx_txt" title="GADV 4CS">GADV 4CS</option>
-		<option value="6502acme" class="code_etx_txt" title="MOS 6502 (6510) ACME Cross Assembler 0.93">ACME Cross Assembler</option>
-		<option value="6502kickass" class="code_etx_txt" title="MOS 6502 (6510) Kick Assembler 3.13">Kick Assembler</option>
-		<option value="6502tasm" class="code_etx_txt" title="MOS 6502 (6510) TASM/64TASS 1.46 Assembler">TASM/64TASS</option>
-		<option value="68000devpac" class="code_etx_txt" title="Motorola 68000 - HiSoft Devpac ST 2 Assembler">Motorola 68000</option>
-		<option value="text" class="code_etx_txt" title="">---------- [A-B-C] ----------</option>
-		<option value="abap" class="code_etx_txt" title="ABAP">ABAP</option>
-		<option value="actionscript" class="code_etx_as" title="Flash ActionScript">ActionScript</option>
-		<option value="actionscript3" class="code_etx_as" title="Flash ActionScript 3">ActionScript3</option>
-		<option value="ada" class="code_etx_ada" title="Ada">ADA</option>
-		<option value="algol68" class="code_etx_txt" title="ALGOL 68">ALGOL 68</option>
-		<option value="apache" class="code_etx_htaccess" title="Apache (HTACCESS)">Apache</option>
-		<option value="applescript" class="code_etx_scpt" title="AppleScript">AppleScript</option>
-		<option value="apt_sources" class="code_etx_txt" title="Apt Sources">Apt Sources</option>
-		<option value="arm" class="code_etx_txt" title="ARM Assembler">ARM Assembler</option>
-		<option value="asymptote" class="code_etx_txt" title="Asymptote">Asymptote</option>
-		<option value="autoconf" class="code_etx_txt" title="AutoConf">AutoConf</option>
-		<option value="autohotkey" class="code_etx_ahk" title="AutoHotKey">AutoHotKey</option>
-		<option value="avisynth" class="code_etx_txt" title="AviSynth">AviSynth</option>
-		<option value="awk" class="code_etx_txt" title="Awk">Awk</option>
-		<option value="bascomavr" class="code_etx_txt" title="Bascom AVR">Bascom AVR</option>
-		<option value="basic4gl" class="code_etx_txt" title="Basic4GL">Basic4GL</option>
-		<option value="bf" class="code_etx_txt" title="Brainfuck">Brainfuck</option>
-		<option value="bibtex" class="code_etx_txt" title="BibTeX">BibTeX</option>
-		<option value="blitzbasic" class="code_etx_txt" title="BlitzBasic">BlitzBasic</option>
-		<option value="bnf" class="code_etx_txt" title="BNF (Backus-Naur Form)">Backus-Naur Form</option>
-		<option value="boo" class="code_etx_txt" title="Boo">Boo</option>
-		<option value="c_loadrunner" class="code_etx_txt" title="C For LoadRunner">C For LoadRunner</option>
-		<option value="c_mac" class="code_etx_txt" title="C For Mac">C For MAC</option>
-		<option value="caddcl" class="code_etx_txt" title="CAD DCL (Dialog Control Language)">CAD DCL</option>
-		<option value="cadlisp" class="code_etx_txt" title="AutoCAD/IntelliCAD Lisp">CAD Lisp</option>
-		<option value="cfdg" class="code_etx_txt" title="CFDG">CFDG</option>
-		<option value="cfm" class="code_etx_txt" title="ColdFusion">ColdFusion</option>
-		<option value="chaiscript" class="code_etx_txt" title="ChaiScript">ChaiScript</option>
-		<option value="cil" class="code_etx_txt" title="CIL (Common Intermediate Language)">CIL</option>
-		<option value="clojure" class="code_etx_txt" title="Clojure">Clojure</option>
-		<option value="coffeescript" class="code_etx_coffee" title="CoffeeScript">CoffeeScript</option>
-		<option value="cpp-qt" class="code_etx_txt" title="C++ (With Qt extensions)">CPP-QT</option>
-		<option value="cuesheet" class="code_etx_txt" title="Cuesheet">Cuesheet</option>
-		<option value="text" class="code_etx_txt" title="">---------- [D-E-F] ----------</option>
-		<option value="d" class="code_etx_d" title="D">D</option>
-		<option value="dcl" class="code_etx_txt" title="DCL">DCL</option>
-		<option value="dcpu16" class="code_etx_txt" title="DCPU/16 Assembly">DCPU/16 Assembly</option>
-		<option value="dcs" class="code_etx_txt" title="DCS">DCS</option>
-		<option value="diff" class="code_etx_diff" title="Diff">DIFF</option>
-		<option value="div" class="code_etx_txt" title="DIV">DIV</option>
-		<option value="dot" class="code_etx_txt" title="Dot">Dot</option>
-		<option value="e" class="code_etx_e" title="E">E</option>
-		<option value="ecmascript" class="code_etx_txt" title="ECMAScript">ECMAScript</option>
-		<option value="eiffel" class="code_etx_txt" title="Eiffel">Eiffel</option>
-		<option value="email" class="code_etx_txt" title="Email (mbox\eml\RFC)">Email</option>
-		<option value="epc" class="code_etx_txt" title="Enerscript">Enerscript</option>
-		<option value="erlang" class="code_etx_txt" title="Erlang">Erlang</option>
-		<option value="euphoria" class="code_etx_txt" title="Euphoria">Euphoria</option>
-		<option value="f1" class="code_etx_txt" title="Formula One">Formula One</option>
-		<option value="falcon" class="code_etx_txt" title="Falcon">Falcon</option>
-		<option value="fo" class="code_etx_txt" title="FO (Abas-ERP)">Abas-ERP</option>
-		<option value="fortran" class="code_etx_f" title="Fortran">Fortran</option>
-		<option value="freebasic" class="code_etx_txt" title="FreeBasic">FreeBasic</option>
-		<option value="freeswitch" class="code_etx_txt" title="FreeSWITCH">FreeSWITCH</option>
-		<option value="fsharp" class="code_etx_fs" title="F#">FSharp</option>
-		<option value="text" class="code_etx_txt" title="">---------- [G-H-I] ----------</option>
-		<option value="gambas" class="code_etx_txt" title="Gambas">Gambas</option>
-		<option value="gdb" class="code_etx_txt" title="GDB">GDB</option>
-		<option value="genero" class="code_etx_txt" title="Genero (FOURJ's Genero 4GL)">FOURJ's Genero 4GL</option>
-		<option value="genie" class="code_etx_txt" title="Genie">Genie</option>
-		<option value="gettext" class="code_etx_txt" title="GNU Gettext">GNU Gettext</option>
-		<option value="glsl" class="code_etx_txt" title="glSlang">glSlang</option>
-		<option value="gml" class="code_etx_txt" title="GML">GML</option>
-		<option value="gnuplot" class="code_etx_txt" title="Gnuplot">Gnuplot</option>
-		<option value="go" class="code_etx_txt" title="Go">Go</option>
-		<option value="groovy" class="code_etx_txt" title="Groovy">Groovy</option>
-		<option value="gwbasic" class="code_etx_txt" title="GwBasic">GwBasic</option>
-		<option value="haskell" class="code_etx_hs" title="Haskell">Haskell</option>
-		<option value="haxe" class="code_etx_txt" title="Haxe">Haxe</option>
-		<option value="hicest" class="code_etx_txt" title="HicEst">HicEst</option>
-		<option value="hq9plus" class="code_etx_txt" title="HQ9+">HQ9+</option>
-		<option value="inno" class="code_etx_iss" title="Inno Setup Script">Inno</option>
-		<option value="icon" class="code_etx_txt" title="Icon">Icon</option>
-		<option value="idl" class="code_etx_txt" title="Uno Idl">Uno Idl</option>
-		<option value="io" class="code_etx_txt" title="Io">Io</option>
-		<option value="text" class="code_etx_txt" title="">---------- [J-K-L] ----------</option>
-		<option value="j" class="code_etx_txt" title="J">J</option>
-		<option value="kixtart" class="code_etx_kix" title="Kixtart">Kixtart</option>
-		<option value="klonec" class="code_etx_txt" title="KLone with C">KLone C</option>
-		<option value="klonecpp" class="code_etx_txt" title="KLone with C++">KLone C++</option>
-		<option value="lb" class="code_etx_txt" title="Liberty BASIC">Liberty BASIC</option>
-		<option value="ldif" class="code_etx_txt" title="LDIF">LDIF</option>
-		<option value="lisp" class="code_etx_txt" title="Generic Lisp">Generic Lisp</option>
-		<option value="llvm" class="code_etx_txt" title="LLVM Intermediate Representation">LLVM</option>
-		<option value="locobasic" class="code_etx_txt" title="Locomotive Basic (Amstrad CPC series)">Locomotive Basic</option>
-		<option value="logtalk" class="code_etx_txt" title="Logtalk">Logtalk</option>
-		<option value="lolcode" class="code_etx_txt" title="LOLcode">LOLcode</option>
-		<option value="lotusformulas" class="code_etx_txt" title="Lotus Notes @Formulas">Lotus Notes @Formulas</option>
-		<option value="lotusscript" class="code_etx_txt" title="LotusScript">LotusScript</option>
-		<option value="lscript" class="code_etx_txt" title="Lightwave Script">LScript</option>
-		<option value="lsl2" class="code_etx_txt" title="Linden Scripting Language (LSL2)">LSL2</option>
-		<option value="text" class="code_etx_txt" title="">---------- [M-N-O] ----------</option>
-		<option value="m68k" class="code_etx_txt" title="Motorola 68000 Assembler">Motorola 68000 Assembler</option>
-		<option value="magiksf" class="code_etx_txt" title="MagikSF">MagikSF</option>
-		<option value="mapbasic" class="code_etx_txt" title="MapBasic">MapBasic</option>
-		<option value="mirc" class="code_etx_txt" title="mIRC Scripting">mIRC</option>
-		<option value="mmix" class="code_etx_txt" title="MMIX Assembler">MMIX</option>
-		<option value="modula2" class="code_etx_txt" title="Modula-2">Modula-2</option>
-		<option value="modula3" class="code_etx_txt" title="Modula-3">Modula-3</option>
-		<option value="mpasm" class="code_etx_txt" title="Microchip Assembler">Microchip Assembler</option>
-		<option value="mxml" class="code_etx_txt" title="MXML">MXML</option>
-		<option value="nagios" class="code_etx_txt" title="Nagios">Nagios</option>
-		<option value="netrexx" class="code_etx_txt" title="NetRexx">NetRexx</option>
-		<option value="newlisp" class="code_etx_txt" title="newLISP">newLISP</option>
-		<option value="oberon2" class="code_etx_txt" title="Oberon-2">Oberon-2</option>
-		<option value="objc" class="code_etx_txt" title="Objective-C">Objective-C</option>
-		<option value="objeck" class="code_etx_txt" title="Objeck">Objeck</option>
-		<option value="ocaml" class="code_etx_txt" title="OCaml (Objective Caml)">OCaml</option>
-		<option value="ocaml-brief" class="code_etx_txt" title="OCaml (Objective Caml)">OCaml (Brief)</option>
-		<option value="octave" class="code_etx_txt" title="GNU Octave M-file">GNU Octave</option>
-		<option value="oobas" class="code_etx_txt" title="OpenOffice.org Basic">OpenOffice.org Basic</option>
-		<option value="oorexx" class="code_etx_txt" title="ooRexx">ooRexx</option>
-		<option value="oxygene" class="code_etx_txt" title="Oxygene (Delphi Prism)">Oxygene (Delphi Prism)</option>
-		<option value="oz" class="code_etx_txt" title="Oz">Oz</option>
-		<option value="text" class="code_etx_txt" title="">--------- [P-Q-R-S] ---------</option>
-		<option value="parasail" class="code_etx_txt" title="ParaSail">ParaSail</option>
-		<option value="parigp" class="code_etx_txt" title="PARI/GP">PARI/GP</option>
-		<option value="per" class="code_etx_txt" title="Per (forms) (FOURJ's Genero 4GL)">Per</option>
-		<option value="pf" class="code_etx_txt" title="OpenBSD Packet Filter">OpenBSD Packet Filter</option>
-		<option value="pic16" class="code_etx_txt" title="PIC16 Assembler">PIC16</option>
-		<option value="pike" class="code_etx_txt" title="Pike">Pike</option>
-		<option value="pixelbender" class="code_etx_txt" title="Pixel Bender 1.0">Pixel Bender 1.0</option>
-		<option value="pli" class="code_etx_txt" title="PL/I">PL/I</option>
-		<option value="plsql" class="code_etx_txt" title="Oracle 9.2 PL/SQL">PL/SQL</option>
-		<option value="povray" class="code_etx_txt" title="Povray">Povray</option>
-		<option value="powerbuilder" class="code_etx_txt" title="PowerBuilder (PowerScript)">PowerBuilder</option>
-		<option value="proftpd" class="code_etx_txt" title="ProFTPd configuration">ProFTPd</option>
-		<option value="progress" class="code_etx_txt" title="Progress">Progress</option>
-		<option value="prolog" class="code_etx_txt" title="Prolog">Prolog</option>
-		<option value="properties" class="code_etx_properties" title="Properties">PROPERTIES</option>
-		<option value="providex" class="code_etx_txt" title="ProvideX">ProvideX</option>
-		<option value="purebasic" class="code_etx_txt" title="PureBasic">PureBasic</option>
-		<option value="pycon" class="code_etx_txt" title="Python (console mode)">Python (console mode)</option>
-		<option value="pys60" class="code_etx_txt" title="Python for S60">Python for S60</option>
-		<option value="q" class="code_etx_txt" title="Q/Kdb+">Q/Kdb+</option>
-		<option value="qbasic" class="code_etx_txt" title="QBasic/QuickBASIC">QBasic/QuickBASIC</option>
-		<option value="rails" class="code_etx_txt" title="Ruby (with Ruby on Rails Framework)">Rails</option>
-		<option value="rebol" class="code_etx_txt" title="Rebol">Rebol</option>
-		<option value="rexx" class="code_etx_txt" title="Rexx">Rexx</option>
-		<option value="rpmspec" class="code_etx_txt" title="RPM Specification File">RPM Specification</option>
-		<option value="rsplus" class="code_etx_txt" title="R/S+">R</option>
-		<option value="sas" class="code_etx_txt" title="SAS">SAS</option>
-		<option value="scala" class="code_etx_txt" title="Scala">Scala</option>
-		<option value="scheme" class="code_etx_scm" title="Scheme">Scheme</option>
-		<option value="scilab" class="code_etx_txt" title="SciLab">SciLab</option>
-		<option value="sdlbasic" class="code_etx_txt" title="sdlBasic">sdlBasic</option>
-		<option value="smalltalk" class="code_etx_st" title="SmallTalk">SmallTalk</option>
-		<option value="smarty" class="code_etx_txt" title="Smarty">Smarty</option>
-		<option value="spark" class="code_etx_txt" title="SPARK">SPARK</option>
-		<option value="sparql" class="code_etx_txt" title="SPARQL">SPARQL</option>
-		<option value="stonescript" class="code_etx_txt" title="StoneScript">StoneScript</option>
-		<option value="systemverilog" class="code_etx_txt" title="SystemVerilog IEEE 1800-2009(draft8)">SystemVerilog</option>
-		<option value="text" class="code_etx_txt" title="">---------- [T-U-V] ----------</option>
-		<option value="tcl" class="code_etx_txt" title="TCL/iTCL">TCL/iTCL</option>
-		<option value="teraterm" class="code_etx_txt" title="Tera Term Macro">Tera Term Macro</option>
-		<option value="thinbasic" class="code_etx_txt" title="thinBasic">thinBasic</option>
-		<option value="tsql" class="code_etx_txt" title="T-SQL">T-SQL</option>
-		<option value="typoscript" class="code_etx_txt" title="TypoScript">TypoScript</option>
-		<option value="unicon" class="code_etx_txt" title="Unicon (Unified Extended Dialect of Icon)">Unicon</option>
-		<option value="upc" class="code_etx_txt" title="UPC">UPC</option>
-		<option value="urbi" class="code_etx_txt" title="Urbi">Urbi</option>
-		<option value="uscript" class="code_etx_txt" title="Unreal Script">UnrealScript</option>
-		<option value="vala" class="code_etx_txt" title="Vala">Vala</option>
-		<option value="vedit" class="code_etx_txt" title="Vedit macro">Vedit</option>
-		<option value="vhdl" class="code_etx_vhdl" title="VHSIC Hardware Description Language">VHSIC</option>
-		<option value="vim" class="code_etx_txt" title="Vim Script">Vim Script</option>
-		<option value="visualfoxpro" class="code_etx_txt" title="Visual FoxPro">Visual FoxPro</option>
-		<option value="visualprolog" class="code_etx_txt" title="Visual Prolog">Visual Prolog</option>
-		<option value="text" class="code_etx_txt" title="">--------- [W-X-Y-Z] ---------</option>
-		<option value="whitespace" class="code_etx_txt" title="Whitespace">Whitespace</option>
-		<option value="whois" class="code_etx_txt" title="Whois response (RPSL format)">Whois (RPSL format)</option>
-		<option value="winbatch" class="code_etx_txt" title="WinBatch">WinBatch</option>
-		<option value="xbasic" class="code_etx_txt" title="XBasic">XBasic</option>
-		<option value="xorg_conf" class="code_etx_txt" title="Xorg configuration (xorg.conf)">Xorg configuration</option>
-		<option value="xpp" class="code_etx_txt" title="Axapta/Dynamics Ax X++">X++</option>
-		<option value="z80" class="code_etx_txt" title="ZiLOG Z80 Assembler">ZiLOG Z80 Assembler</option>
-		<option value="zxbasic" class="code_etx_txt" title="ZXBasic">ZXBasic</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_TEXT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_TEXT}</option>
+		<option value="robots" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_ROBOTS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ROBOTS}</option>
+		<option value="asm" class="code_etx_asm" title="{L_CODEBOX_PLUS_SYNTAX_ASM_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ASM}</option>
+		<option value="asp" class="code_etx_asp" title="{L_CODEBOX_PLUS_SYNTAX_ASP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ASP}</option>
+		<option value="autoit" class="code_etx_au3" title="{L_CODEBOX_PLUS_SYNTAX_AUTOIT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_AUTOIT}</option>
+		<option value="dos" class="code_etx_bat" title="{L_CODEBOX_PLUS_SYNTAX_DOS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_DOS}</option>
+		<option value="bash" class="code_etx_bsh" title="{L_CODEBOX_PLUS_SYNTAX_BASH_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_BASH}</option>
+		<option value="c" class="code_etx_c" title="{L_CODEBOX_PLUS_SYNTAX_C_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_C}</option>
+		<option value="cobol" class="code_etx_cbl" title="{L_CODEBOX_PLUS_SYNTAX_COBOL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_COBOL}</option>
+		<option value="cmake" class="code_etx_cmake" title="{L_CODEBOX_PLUS_SYNTAX_CMAKE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CMAKE}</option>
+		<option value="cpp" class="code_etx_cpp" title="{L_CODEBOX_PLUS_SYNTAX_CPP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CPP}</option>
+		<option value="csharp" class="code_etx_cs" title="{L_CODEBOX_PLUS_SYNTAX_CSHARP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CSHARP}</option>
+		<option value="css" class="code_etx_css" title="{L_CODEBOX_PLUS_SYNTAX_CSS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CSS}</option>
+		<option value="html4strict" class="code_etx_html" title="{L_CODEBOX_PLUS_SYNTAX_HTML4STRICT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_HTML4STRICT}</option>
+		<option value="html5" class="code_etx_html" title="{L_CODEBOX_PLUS_SYNTAX_HTML5_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_HTML5}</option>
+		<option value="ini" class="code_etx_ini" title="{L_CODEBOX_PLUS_SYNTAX_INI_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_INI}</option>
+		<option value="java" class="code_etx_java" title="{L_CODEBOX_PLUS_SYNTAX_JAVA_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_JAVA}</option>
+		<option value="java5" class="code_etx_java" title="{L_CODEBOX_PLUS_SYNTAX_JAVA5_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_JAVA5}</option>
+		<option value="javascript" class="code_etx_js" title="{L_CODEBOX_PLUS_SYNTAX_JAVASCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_JAVASCRIPT}</option>
+		<option value="jquery" class="code_etx_js" title="{L_CODEBOX_PLUS_SYNTAX_JQUERY_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_JQUERY}</option>
+		<option value="lua" class="code_etx_lua" title="{L_CODEBOX_PLUS_SYNTAX_LUA_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LUA}</option>
+		<option value="matlab" class="code_etx_m" title="{L_CODEBOX_PLUS_SYNTAX_MATLAB_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MATLAB}</option>
+		<option value="make" class="code_etx_make" title="{L_CODEBOX_PLUS_SYNTAX_MAKE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MAKE}</option>
+		<option value="nsis" class="code_etx_nsi" title="{L_CODEBOX_PLUS_SYNTAX_NSIS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_NSIS}</option>
+		<option value="delphi" class="code_etx_pas" title="{L_CODEBOX_PLUS_SYNTAX_DELPHI_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_DELPHI}</option>
+		<option value="pascal" class="code_etx_pas" title="{L_CODEBOX_PLUS_SYNTAX_PASCAL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PASCAL}</option>
+		<option value="php" class="code_etx_php" title="{L_CODEBOX_PLUS_SYNTAX_PHP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PHP}</option>
+		<option value="php-brief" class="code_etx_php" title="{L_CODEBOX_PLUS_SYNTAX_PHPBRIEF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PHPBRIEF}</option>
+		<option value="perl" class="code_etx_pl" title="{L_CODEBOX_PLUS_SYNTAX_PERL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PERL}</option>
+		<option value="perl6" class="code_etx_pl" title="{L_CODEBOX_PLUS_SYNTAX_PERL6_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PERL6}</option>
+		<option value="pcre" class="code_etx_pl" title="{L_CODEBOX_PLUS_SYNTAX_PCRE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PCRE}</option>
+		<option value="powershell" class="code_etx_ps1" title="{L_CODEBOX_PLUS_SYNTAX_POWERSHELL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_POWERSHELL}</option>
+		<option value="python" class="code_etx_py" title="{L_CODEBOX_PLUS_SYNTAX_PYTHON_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PYTHON}</option>
+		<option value="ruby" class="code_etx_rb" title="{L_CODEBOX_PLUS_SYNTAX_RUBY_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_RUBY}</option>
+		<option value="reg" class="code_etx_reg" title="{L_CODEBOX_PLUS_SYNTAX_REG_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_REG}</option>
+		<option value="mysql" class="code_etx_sql" title="{L_CODEBOX_PLUS_SYNTAX_MYSQL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MYSQL}</option>
+		<option value="oracle8" class="code_etx_sql" title="{L_CODEBOX_PLUS_SYNTAX_ORACLE8_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ORACLE8}</option>
+		<option value="oracle11" class="code_etx_sql" title="{L_CODEBOX_PLUS_SYNTAX_ORACLE11_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ORACLE11}</option>
+		<option value="postgresql" class="code_etx_sql" title="{L_CODEBOX_PLUS_SYNTAX_POSTGRESQL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_POSTGRESQL}</option>
+		<option value="sql" class="code_etx_sql" title="{L_CODEBOX_PLUS_SYNTAX_SQL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SQL}</option>
+		<option value="latex" class="code_etx_tex" title="{L_CODEBOX_PLUS_SYNTAX_LATEX_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LATEX}</option>
+		<option value="verilog" class="code_etx_v" title="{L_CODEBOX_PLUS_SYNTAX_VERILOG_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_VERILOG}</option>
+		<option value="vbnet" class="code_etx_vb" title="{L_CODEBOX_PLUS_SYNTAX_VBNET_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_VBNET}</option>
+		<option value="vb" class="code_etx_vb" title="{L_CODEBOX_PLUS_SYNTAX_VB_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_VB}</option>
+		<option value="xml" class="code_etx_xml" title="{L_CODEBOX_PLUS_SYNTAX_XML_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_XML}</option>
+		<option value="yaml" class="code_etx_yml" title="{L_CODEBOX_PLUS_SYNTAX_YAML_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_YAML}</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_G09_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_G09}</option>
+		<option value="4cs" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_4CS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_4CS}</option>
+		<option value="6502acme" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_6502ACME_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_6502ACME}</option>
+		<option value="6502kickass" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_6502KICKASS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_6502KICKASS}</option>
+		<option value="6502tasm" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_6502TASM_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_6502TASM}</option>
+		<option value="68000devpac" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_68000DEVPAC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_68000DEVPAC}</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GABC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GABC}</option>
+		<option value="abap" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_ABAP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ABAP}</option>
+		<option value="actionscript" class="code_etx_as" title="{L_CODEBOX_PLUS_SYNTAX_ACTIONSCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ACTIONSCRIPT}</option>
+		<option value="actionscript3" class="code_etx_as" title="{L_CODEBOX_PLUS_SYNTAX_ACTIONSCRIPT3_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ACTIONSCRIPT3}</option>
+		<option value="ada" class="code_etx_ada" title="{L_CODEBOX_PLUS_SYNTAX_ADA_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ADA}</option>
+		<option value="algol68" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_ALGOL68_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ALGOL68}</option>
+		<option value="apache" class="code_etx_htaccess" title="{L_CODEBOX_PLUS_SYNTAX_APACHE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_APACHE}</option>
+		<option value="applescript" class="code_etx_scpt" title="{L_CODEBOX_PLUS_SYNTAX_APPLESCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_APPLESCRIPT}</option>
+		<option value="apt_sources" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_APT_SOURCES_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_APT_SOURCES}</option>
+		<option value="arm" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_ARM_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ARM}</option>
+		<option value="asymptote" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_ASYMPTOTE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ASYMPTOTE}</option>
+		<option value="autoconf" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_AUTOCONF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_AUTOCONF}</option>
+		<option value="autohotkey" class="code_etx_ahk" title="{L_CODEBOX_PLUS_SYNTAX_AUTOHOTKEY_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_AUTOHOTKEY}</option>
+		<option value="avisynth" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_AVISYNTH_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_AVISYNTH}</option>
+		<option value="awk" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_AWK_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_AWK}</option>
+		<option value="bascomavr" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_BASCOMAVR_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_BASCOMAVR}</option>
+		<option value="basic4gl" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_BASIC4GL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_BASIC4GL}</option>
+		<option value="bf" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_BF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_BF}</option>
+		<option value="bibtex" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_BIBTEX_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_BIBTEX}</option>
+		<option value="blitzbasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_BLITZBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_BLITZBASIC}</option>
+		<option value="bnf" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_BNF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_BNF}</option>
+		<option value="boo" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_BOO_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_BOO}</option>
+		<option value="c_loadrunner" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_C_LOADRUNNER_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_C_LOADRUNNER}</option>
+		<option value="c_mac" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_C_MAC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_C_MAC}</option>
+		<option value="caddcl" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_CADDCL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CADDCL}</option>
+		<option value="cadlisp" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_CADLISP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CADLISP}</option>
+		<option value="cfdg" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_CFDG_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CFDG}</option>
+		<option value="cfm" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_CFM_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CFM}</option>
+		<option value="chaiscript" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_CHAISCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CHAISCRIPT}</option>
+		<option value="cil" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_CIL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CIL}</option>
+		<option value="clojure" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_CLOJURE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CLOJURE}</option>
+		<option value="coffeescript" class="code_etx_coffee" title="{L_CODEBOX_PLUS_SYNTAX_COFFEESCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_COFFEESCRIPT}</option>
+		<option value="cpp-qt" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_CPPQT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CPPQT}</option>
+		<option value="cuesheet" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_CUESHEET_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_CUESHEET}</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GDEF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GDEF}</option>
+		<option value="d" class="code_etx_d" title="{L_CODEBOX_PLUS_SYNTAX_D_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_D}</option>
+		<option value="dcl" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_DCL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_DCL}</option>
+		<option value="dcpu16" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_DCPU16_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_DCPU16}</option>
+		<option value="dcs" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_DCS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_DCS}</option>
+		<option value="diff" class="code_etx_diff" title="{L_CODEBOX_PLUS_SYNTAX_DIFF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_DIFF}</option>
+		<option value="div" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_DIV_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_DIV}</option>
+		<option value="dot" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_DOT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_DOT}</option>
+		<option value="e" class="code_etx_e" title="{L_CODEBOX_PLUS_SYNTAX_E_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_E}</option>
+		<option value="ecmascript" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_ECMASCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ECMASCRIPT}</option>
+		<option value="eiffel" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_EIFFEL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_EIFFEL}</option>
+		<option value="email" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_EMAIL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_EMAIL}</option>
+		<option value="epc" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_EPC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_EPC}</option>
+		<option value="erlang" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_ERLANG_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ERLANG}</option>
+		<option value="euphoria" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_EUPHORIA_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_EUPHORIA}</option>
+		<option value="f1" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_F1_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_F1}</option>
+		<option value="falcon" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_FALCON_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_FALCON}</option>
+		<option value="fo" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_FO_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_FO}</option>
+		<option value="fortran" class="code_etx_f" title="{L_CODEBOX_PLUS_SYNTAX_FORTRAN_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_FORTRAN}</option>
+		<option value="freebasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_FREEBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_FREEBASIC}</option>
+		<option value="freeswitch" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_FREESWITCH_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_FREESWITCH}</option>
+		<option value="fsharp" class="code_etx_fs" title="{L_CODEBOX_PLUS_SYNTAX_FSHARP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_FSHARP}</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GGHI_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GGHI}</option>
+		<option value="gambas" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GAMBAS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GAMBAS}</option>
+		<option value="gdb" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GDB_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GDB}</option>
+		<option value="genero" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GENERO_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GENERO}</option>
+		<option value="genie" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GENIE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GENIE}</option>
+		<option value="gettext" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GETTEXT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GETTEXT}</option>
+		<option value="glsl" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GLSL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GLSL}</option>
+		<option value="gml" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GML_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GML}</option>
+		<option value="gnuplot" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GNUPLOT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GNUPLOT}</option>
+		<option value="go" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GO_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GO}</option>
+		<option value="groovy" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GROOVY_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GROOVY}</option>
+		<option value="gwbasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GWBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GWBASIC}</option>
+		<option value="haskell" class="code_etx_hs" title="{L_CODEBOX_PLUS_SYNTAX_HASKELL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_HASKELL}</option>
+		<option value="haxe" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_HAXE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_HAXE}</option>
+		<option value="hicest" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_HICEST_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_HICEST}</option>
+		<option value="hq9plus" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_HQ9PLUS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_HQ9PLUS}</option>
+		<option value="inno" class="code_etx_iss" title="{L_CODEBOX_PLUS_SYNTAX_INNO_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_INNO}</option>
+		<option value="icon" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_ICON_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ICON}</option>
+		<option value="idl" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_IDL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_IDL}</option>
+		<option value="io" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_IO_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_IO}</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GJKL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GJKL}</option>
+		<option value="j" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_J_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_J}</option>
+		<option value="kixtart" class="code_etx_kix" title="{L_CODEBOX_PLUS_SYNTAX_KIXTART_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_KIXTART}</option>
+		<option value="klonec" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_KLONEC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_KLONEC}</option>
+		<option value="klonecpp" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_KLONECPP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_KLONECPP}</option>
+		<option value="lb" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LB_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LB}</option>
+		<option value="ldif" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LDIF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LDIF}</option>
+		<option value="lisp" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LISP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LISP}</option>
+		<option value="llvm" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LLVM_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LLVM}</option>
+		<option value="locobasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LOCOBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LOCOBASIC}</option>
+		<option value="logtalk" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LOGTALK_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LOGTALK}</option>
+		<option value="lolcode" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LOLCODE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LOLCODE}</option>
+		<option value="lotusformulas" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LOTUSFORMULAS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LOTUSFORMULAS}</option>
+		<option value="lotusscript" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LOTUSSCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LOTUSSCRIPT}</option>
+		<option value="lscript" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LSCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LSCRIPT}</option>
+		<option value="lsl2" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_LSL2_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_LSL2}</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GMNO_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GMNO}</option>
+		<option value="m68k" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_M68K_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_M68K}</option>
+		<option value="magiksf" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_MAGIKSF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MAGIKSF}</option>
+		<option value="mapbasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_MAPBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MAPBASIC}</option>
+		<option value="mirc" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_MIRC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MIRC}</option>
+		<option value="mmix" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_MMIX_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MMIX}</option>
+		<option value="modula2" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_MODULA2_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MODULA2}</option>
+		<option value="modula3" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_MODULA3_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MODULA3}</option>
+		<option value="mpasm" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_MPASM_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MPASM}</option>
+		<option value="mxml" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_MXML_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_MXML}</option>
+		<option value="nagios" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_NAGIOS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_NAGIOS}</option>
+		<option value="netrexx" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_NETREXX_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_NETREXX}</option>
+		<option value="newlisp" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_NEWLISP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_NEWLISP}</option>
+		<option value="oberon2" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OBERON2_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OBERON2}</option>
+		<option value="objc" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OBJC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OBJC}</option>
+		<option value="objeck" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OBJECK_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OBJECK}</option>
+		<option value="ocaml" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OCAML_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OCAML}</option>
+		<option value="ocaml-brief" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OCAMLBRIEF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OCAMLBRIEF}</option>
+		<option value="octave" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OCTAVE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OCTAVE}</option>
+		<option value="oobas" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OOBAS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OOBAS}</option>
+		<option value="oorexx" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OOREXX_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OOREXX}</option>
+		<option value="oxygene" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OXYGENE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OXYGENE}</option>
+		<option value="oz" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_OZ_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_OZ}</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GPQRS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GPQRS}</option>
+		<option value="parasail" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PARASAIL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PARASAIL}</option>
+		<option value="parigp" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PARIGP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PARIGP}</option>
+		<option value="per" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PER_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PER}</option>
+		<option value="pf" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PF}</option>
+		<option value="pic16" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PIC16_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PIC16}</option>
+		<option value="pike" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PIKE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PIKE}</option>
+		<option value="pixelbender" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PIXELBENDER_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PIXELBENDER}</option>
+		<option value="pli" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PLI_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PLI}</option>
+		<option value="plsql" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PLSQL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PLSQL}</option>
+		<option value="povray" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_POVRAY_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_POVRAY}</option>
+		<option value="powerbuilder" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_POWERBUILDER_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_POWERBUILDER}</option>
+		<option value="proftpd" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PROFTPD_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PROFTPD}</option>
+		<option value="progress" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PROGRESS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PROGRESS}</option>
+		<option value="prolog" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PROLOG_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PROLOG}</option>
+		<option value="properties" class="code_etx_properties" title="{L_CODEBOX_PLUS_SYNTAX_PROPERTIES_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PROPERTIES}</option>
+		<option value="providex" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PROVIDEX_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PROVIDEX}</option>
+		<option value="purebasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PUREBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PUREBASIC}</option>
+		<option value="pycon" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PYCON_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PYCON}</option>
+		<option value="pys60" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_PYS60_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_PYS60}</option>
+		<option value="q" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_Q_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_Q}</option>
+		<option value="qbasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_QBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_QBASIC}</option>
+		<option value="rails" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_RAILS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_RAILS}</option>
+		<option value="rebol" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_REBOL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_REBOL}</option>
+		<option value="rexx" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_REXX_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_REXX}</option>
+		<option value="rpmspec" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_RPMSPEC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_RPMSPEC}</option>
+		<option value="rsplus" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_RSPLUS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_RSPLUS}</option>
+		<option value="sas" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_SAS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SAS}</option>
+		<option value="scala" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_SCALA_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SCALA}</option>
+		<option value="scheme" class="code_etx_scm" title="{L_CODEBOX_PLUS_SYNTAX_SCHEME_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SCHEME}</option>
+		<option value="scilab" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_SCILAB_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SCILAB}</option>
+		<option value="sdlbasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_SDLBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SDLBASIC}</option>
+		<option value="smalltalk" class="code_etx_st" title="{L_CODEBOX_PLUS_SYNTAX_SMALLTALK_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SMALLTALK}</option>
+		<option value="smarty" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_SMARTY_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SMARTY}</option>
+		<option value="spark" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_SPARK_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SPARK}</option>
+		<option value="sparql" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_SPARQL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SPARQL}</option>
+		<option value="stonescript" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_STONESCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_STONESCRIPT}</option>
+		<option value="systemverilog" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_SYSTEMVERILOG_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_SYSTEMVERILOG}</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GTUV_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GTUV}</option>
+		<option value="tcl" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_TCL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_TCL}</option>
+		<option value="teraterm" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_TERATERM_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_TERATERM}</option>
+		<option value="thinbasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_THINBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_THINBASIC}</option>
+		<option value="tsql" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_TSQL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_TSQL}</option>
+		<option value="typoscript" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_TYPOSCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_TYPOSCRIPT}</option>
+		<option value="unicon" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_UNICON_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_UNICON}</option>
+		<option value="upc" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_UPC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_UPC}</option>
+		<option value="urbi" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_URBI_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_URBI}</option>
+		<option value="uscript" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_USCRIPT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_USCRIPT}</option>
+		<option value="vala" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_VALA_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_VALA}</option>
+		<option value="vedit" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_VEDIT_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_VEDIT}</option>
+		<option value="vhdl" class="code_etx_vhdl" title="{L_CODEBOX_PLUS_SYNTAX_VHDL_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_VHDL}</option>
+		<option value="vim" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_VIM_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_VIM}</option>
+		<option value="visualfoxpro" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_VISUALFOXPRO_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_VISUALFOXPRO}</option>
+		<option value="visualprolog" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_VISUALPROLOG_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_VISUALPROLOG}</option>
+		<option value="text" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_GWXYZ_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_GWXYZ}</option>
+		<option value="whitespace" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_WHITESPACE_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_WHITESPACE}</option>
+		<option value="whois" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_WHOIS_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_WHOIS}</option>
+		<option value="winbatch" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_WINBATCH_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_WINBATCH}</option>
+		<option value="xbasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_XBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_XBASIC}</option>
+		<option value="xorg_conf" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_XORG_CONF_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_XORG_CONF}</option>
+		<option value="xpp" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_XPP_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_XPP}</option>
+		<option value="z80" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_Z80_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_Z80}</option>
+		<option value="zxbasic" class="code_etx_txt" title="{L_CODEBOX_PLUS_SYNTAX_ZXBASIC_EXPLAIN}">{L_CODEBOX_PLUS_SYNTAX_ZXBASIC}</option>
 	</select>
 </div>
 <!-- ENDIF -->

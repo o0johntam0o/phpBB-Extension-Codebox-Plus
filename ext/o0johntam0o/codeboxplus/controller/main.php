@@ -68,10 +68,15 @@ class main
 	
 	public function downloader($id = 0, $part = 0)
 	{
+		$id = (int) $id;
 		// If download function was disabled
 		if (!$this->enable_download)
 		{
-			trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_DOWNLOAD_DISABLED']);
+			$this->template->assign_vars(array(
+				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_DOWNLOAD_DISABLED'],
+			));
+
+			return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 		}
 		// Prevent bots
 		if ($this->enable_prevent_bots && $this->user->data['is_bot'])
@@ -86,7 +91,11 @@ class main
 		
 		if (!$this->auth->acl_get('f_read', $row['forum_id']))
 		{
-			trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_NO_PERMISSION']);
+			$this->template->assign_vars(array(
+				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_NO_PERMISSION'],
+			));
+
+			return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 		}
 		// Login to download
 		if ($this->enable_login_required && !$this->user->data['is_registered'])
@@ -119,7 +128,11 @@ class main
 				// Too many request...
 				if ($tmp_captcha->get_attempt_count() >= $this->max_attempt)
 				{
-					trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_CONFIRM']);
+					$this->template->assign_vars(array(
+						'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_CONFIRM'],
+					));
+
+					return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 				}
 				
 				$this->template->assign_vars(array(
@@ -139,7 +152,10 @@ class main
 		else
 		{
 			// Everything is ok, start download
-			$this->codebox_output($id, $part);
+			if ($this->codebox_output($id, $part) === false)
+			{
+				return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
+			}
 			garbage_collection();
 			exit_handler();
 		}
@@ -157,7 +173,11 @@ class main
 		// CHECK REQUEST
 		if ($id <= 0 || $part <= 0)
 		{
-			trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_GENERAL']);
+			$this->template->assign_vars(array(
+				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_GENERAL'],
+			));
+
+			return false;
 		}
 
 		// PROCESS REQUEST
@@ -169,14 +189,18 @@ class main
 
 		if ($post_data === false)
 		{
-			trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_POST_NOT_FOUND']);
+			$this->template->assign_vars(array(
+				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_POST_NOT_FOUND'],
+			));
+
+			return false;
 		}
 
 		//- Process post data
 		// Collect code
 		preg_match_all("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $post_data['bbcode_uid'] . "\](.*?)\[/codebox:" . $post_data['bbcode_uid'] . "\]#msi", $post_data['post_text'], $code_data);
 		
-		if (count($code_data[2]) >= $part)
+		if (sizeof($code_data[2]) >= $part)
 		{
 			$part--;
 			$code = $code_data[2][$part];
@@ -193,12 +217,20 @@ class main
 			}
 			else
 			{
-				trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_FILE_EMPTY']);
+				$this->template->assign_vars(array(
+					'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_FILE_EMPTY'],
+				));
+
+				return false;
 			}
 		}
 		else
 		{
-			trigger_error($this->user->lang['CODEBOX_PLUS_ERROR_CODE_NOT_FOUND']);
+			$this->template->assign_vars(array(
+				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_CODE_NOT_FOUND'],
+			));
+
+			return false;
 		}
 
 		// RESPOND

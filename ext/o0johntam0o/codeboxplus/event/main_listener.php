@@ -88,7 +88,7 @@ class main_listener implements EventSubscriberInterface
 		if (isset($event['text']))
 		{
 			$text = $event['text'];
-			$text = preg_replace('#' . preg_quote('<div class="codebox" title="Codebox Plus"><p>') . '.*?' . preg_quote('</code></div>') . '#msi', $this->codebox_template('NULL', 'NULL'), $text);
+			$text = preg_replace('#' . preg_quote('<div class="codebox" title="' . $this->user->lang['CODEBOX_PLUS_TITLE'] . '"><p>') . '.*?' . preg_quote('</code></div>') . '#msi', $this->codebox_template('NULL', 'NULL'), $text);
 			$event['text'] = $text;
 		}
     }
@@ -193,7 +193,7 @@ class main_listener implements EventSubscriberInterface
 		}
 		
 		$re .= '</div>';
-		$re .= '<div><div style="display: none;">';
+		$re .= '<div><div style="display: ' . (($lang != 'NULL') ? 'none' : 'inline') . ';">';
 		
 		if ($lang != 'NULL')
 		{
@@ -205,7 +205,7 @@ class main_listener implements EventSubscriberInterface
 		}
 		
 		$re .= '</div></div>';
-		$re .= '<div class="codebox_plus_footer"><a href="http://qbnz.com/highlighter/">GeSHi</a> &copy; <a href="https://www.phpbb.com/customise/db/extension/codeboxplus/">Codebox Plus</a></div></div>';
+		$re .= '<div class="codebox_plus_footer">' . $this->user->lang['CODEBOX_PLUS_GESHI'] . ' &copy; ' . $this->user->lang['CODEBOX_PLUS_TITLE'] . '</div></div>';
 		
 		return $re;
 	}

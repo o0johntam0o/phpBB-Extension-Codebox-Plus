@@ -40,6 +40,14 @@
 // version
 //
 
+/**
+* DO NOT CHANGE
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 /** The version of this GeSHi file */
 define('GESHI_VERSION', '1.0.8.11');
 
