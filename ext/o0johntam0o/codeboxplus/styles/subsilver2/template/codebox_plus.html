@@ -1,28 +1,43 @@
-<!-- INCLUDE overall_header.html -->
-<!-- IF CODEBOX_PLUS_DOWNLOAD_AVAILABLE -->
-<form action="{S_CODE_DOWNLOADER_ACTION}" method="post">
-	<table class="tablebg" width="100%" cellspacing="1">
-		<tr>
-			<td class="cat" <!-- IF not S_ADMIN_AUTH or S_CONFIRM_CODE -->colspan="2"<!-- ENDIF --> align="center"><span class="gensmall">{L_CODEBOX_PLUS_CONFIRM}</span></td>
-		</tr>
-		<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
-			<!-- DEFINE $CAPTCHA_TAB_INDEX = 1 -->
-			<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+<!-- IF CODEBOX_PLUS_DOWNLOAD_AVAILABLE and S_CODEBOX_PLUS_DOWNLOAD_INFO -->{S_CODEBOX_PLUS_DOWNLOAD_INFO_CONTENT}<!-- ELSE -->
+	<!-- IF CODEBOX_PLUS_DOWNLOAD_AVAILABLE -->
+		<!-- INCLUDE overall_header.html -->
+		<!-- IF S_CODEBOX_PLUS_ERROR -->
+		<table class="tablebg" width="100%" cellspacing="1">
+			<tr>
+				<th>{L_INFORMATION}</th>
+			</tr>
+			<tr>
+				<td>{S_CODEBOX_PLUS_ERROR}</td>
+			</tr>
+		</table>
+		<!-- ELSE -->
+		<form action="{S_CODE_DOWNLOADER_ACTION}" method="post">
+			<table class="tablebg" width="100%" cellspacing="1">
+				<tr>
+					<td class="cat" <!-- IF not S_ADMIN_AUTH or S_CONFIRM_CODE -->colspan="2"<!-- ENDIF --> align="center"><span class="gensmall">{L_CODEBOX_PLUS_CONFIRM}</span></td>
+				</tr>
+				<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
+					<!-- DEFINE $CAPTCHA_TAB_INDEX = 1 -->
+					<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+				<!-- ENDIF -->
+				<tr>
+					<td class="cat" <!-- IF not S_ADMIN_AUTH or S_CONFIRM_CODE -->colspan="2"<!-- ENDIF --> align="center"><input type="submit" name="submit" class="btnmain" value="{L_SUBMIT}" tabindex="2" /></td>
+				</tr>
+			</table>
+			{S_FORM_TOKEN}
+		</form>
 		<!-- ENDIF -->
-		<tr>
-			<td class="cat" <!-- IF not S_ADMIN_AUTH or S_CONFIRM_CODE -->colspan="2"<!-- ENDIF --> align="center"><input type="submit" name="submit" class="btnmain" value="{L_SUBMIT}" tabindex="2" /></td>
-		</tr>
-	</table>
-	{S_FORM_TOKEN}
-</form>
-<!-- ELSE -->
-<table class="tablebg" width="100%" cellspacing="1">
-	<tr>
-		<th>{L_INFORMATION}</th>
-	</tr>
-	<tr>
-		<td>{L_NO_ACTION}</td>
-	</tr>
-</table>
+		<!-- INCLUDE overall_footer.html -->
+	<!-- ELSE -->
+		<!-- INCLUDE overall_header.html -->
+		<table class="tablebg" width="100%" cellspacing="1">
+			<tr>
+				<th>{L_INFORMATION}</th>
+			</tr>
+			<tr>
+				<td>{L_CODEBOX_PLUS_ERROR_DOWNLOAD_DISABLED}</td>
+			</tr>
+		</table>
+		<!-- INCLUDE overall_footer.html -->
+	<!-- ENDIF -->
 <!-- ENDIF -->
-<!-- INCLUDE overall_footer.html -->

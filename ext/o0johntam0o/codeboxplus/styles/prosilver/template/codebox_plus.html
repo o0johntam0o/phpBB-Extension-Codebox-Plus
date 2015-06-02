@@ -1,38 +1,42 @@
-<!-- INCLUDE overall_header.html -->
-<!-- IF CODEBOX_PLUS_DOWNLOAD_AVAILABLE -->
-	<!-- IF CODEBOX_PLUS_ERROR -->
-	<div id="information" class="rules">
-		<div class="inner">
-			<strong>{L_INFORMATION}{L_COLON}</strong> {CODEBOX_PLUS_ERROR}
-		</div>
-	</div>
-	<!-- ELSE -->
-	<form action="{S_CODE_DOWNLOADER_ACTION}" method="post">
-	<div class="panel">
-		<div class="inner">
-			<div class="content">
-				<h2>{L_CODEBOX_PLUS_CONFIRM}</h2>
-				<fieldset class="fields1">
-					<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
-						<!-- DEFINE $CAPTCHA_TAB_INDEX = 1 -->
-						<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
-					<!-- ENDIF -->
-					<dl>
-						<dt>&nbsp;</dt>
-						<dd><input type="submit" name="submit" tabindex="2" value="{L_SUBMIT}" class="button1" /></dd>
-					</dl>
-				</fieldset>
+<!-- IF CODEBOX_PLUS_DOWNLOAD_AVAILABLE and S_CODEBOX_PLUS_DOWNLOAD_INFO -->{S_CODEBOX_PLUS_DOWNLOAD_INFO_CONTENT}<!-- ELSE -->
+	<!-- IF CODEBOX_PLUS_DOWNLOAD_AVAILABLE -->
+		<!-- INCLUDE overall_header.html -->
+		<!-- IF S_CODEBOX_PLUS_ERROR -->
+		<div id="information" class="rules">
+			<div class="inner">
+				<strong>{L_INFORMATION}{L_COLON}</strong> {S_CODEBOX_PLUS_ERROR}
 			</div>
 		</div>
-	</div>
-	{S_FORM_TOKEN}
-	</form>
+		<!-- ELSE -->
+		<form action="{S_CODE_DOWNLOADER_ACTION}" method="post">
+			<div class="panel">
+				<div class="inner">
+					<div class="content">
+						<h2>{L_CODEBOX_PLUS_CONFIRM}</h2>
+						<fieldset class="fields1">
+							<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
+								<!-- DEFINE $CAPTCHA_TAB_INDEX = 1 -->
+								<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+							<!-- ENDIF -->
+							<dl>
+								<dt>&nbsp;</dt>
+								<dd><input type="submit" name="submit" tabindex="2" value="{L_SUBMIT}" class="button1" /></dd>
+							</dl>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+			{S_FORM_TOKEN}
+		</form>
+		<!-- ENDIF -->
+		<!-- INCLUDE overall_footer.html -->
+	<!-- ELSE -->
+		<!-- INCLUDE overall_header.html -->
+		<div id="information" class="rules">
+			<div class="inner">
+				<strong>{L_INFORMATION}{L_COLON}</strong> {L_CODEBOX_PLUS_ERROR_DOWNLOAD_DISABLED}
+			</div>
+		</div>
+		<!-- INCLUDE overall_footer.html -->
 	<!-- ENDIF -->
-<!-- ELSE -->
-<div id="information" class="rules">
-	<div class="inner">
-		<strong>{L_INFORMATION}{L_COLON}</strong> {L_CODEBOX_PLUS_ERROR_DOWNLOAD_DISABLED}
-	</div>
-</div>
 <!-- ENDIF -->
-<!-- INCLUDE overall_footer.html -->

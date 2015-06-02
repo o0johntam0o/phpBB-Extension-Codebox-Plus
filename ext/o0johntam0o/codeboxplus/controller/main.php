@@ -66,15 +66,18 @@ class main
 		return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 	}
 	
+	/**
+	*  @param		$id			post_id
+	*  @param		$part		Code part
+	*  @return		mixed		Render output to the template
+	**/
 	public function downloader($id = 0, $part = 0)
 	{
 		$id = (int) $id;
 		// If download function was disabled
 		if (!$this->enable_download)
 		{
-			$this->template->assign_vars(array(
-				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_DOWNLOAD_DISABLED'],
-			));
+			$this->template->assign_var('S_CODEBOX_PLUS_ERROR', $this->user->lang['CODEBOX_PLUS_ERROR_DOWNLOAD_DISABLED']);
 
 			return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 		}
@@ -91,9 +94,7 @@ class main
 		
 		if (!$this->auth->acl_get('f_read', $row['forum_id']))
 		{
-			$this->template->assign_vars(array(
-				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_NO_PERMISSION'],
-			));
+			$this->template->assign_var('S_CODEBOX_PLUS_ERROR', $this->user->lang['CODEBOX_PLUS_ERROR_NO_PERMISSION']);
 
 			return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 		}
@@ -116,8 +117,6 @@ class main
 				if ($tmp_captcha->is_solved())
 				{
 					$tmp_captcha->reset();
-					// Everything is ok, start download
-					$this->codebox_output($id, $part);
 					$ok = true;
 				}
 			}
@@ -128,9 +127,7 @@ class main
 				// Too many request...
 				if ($tmp_captcha->get_attempt_count() >= $this->max_attempt)
 				{
-					$this->template->assign_vars(array(
-						'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_CONFIRM'],
-					));
+					$this->template->assign_var('S_CODEBOX_PLUS_ERROR', $this->user->lang['CODEBOX_PLUS_ERROR_CONFIRM']);
 
 					return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 				}
@@ -145,22 +142,27 @@ class main
 			}
 			else
 			{
+				// Downloading
+				$this->codebox_output($id, $part);
 				garbage_collection();
-				exit_handler();
+				return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
+				//exit_handler();
 			}
 		}
 		else
 		{
-			// Everything is ok, start download
-			if ($this->codebox_output($id, $part) === false)
-			{
-				return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
-			}
-			garbage_collection();
-			exit_handler();
+			// Downloading
+			$this->codebox_output($id, $part);
+			return $this->helper->render('codebox_plus.html', $this->user->lang['CODEBOX_PLUS_DOWNLOAD']);
 		}
 	}
 	
+	/**
+	*  @param		$id			post_id
+	*  @param		$part		Code part
+	*  @return		mixed		If false, assign S_CODEBOX_PLUS_ERROR to template
+	*							If true, send header information to browser
+	**/
 	private function codebox_output($id = 0, $part = 0)
 	{
 		$id = (int) $id;
@@ -173,9 +175,7 @@ class main
 		// CHECK REQUEST
 		if ($id <= 0 || $part <= 0)
 		{
-			$this->template->assign_vars(array(
-				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_GENERAL'],
-			));
+			$this->template->assign_var('S_CODEBOX_PLUS_ERROR', $this->user->lang['CODEBOX_PLUS_ERROR_GENERAL']);
 
 			return false;
 		}
@@ -189,9 +189,7 @@ class main
 
 		if ($post_data === false)
 		{
-			$this->template->assign_vars(array(
-				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_POST_NOT_FOUND'],
-			));
+			$this->template->assign_var('S_CODEBOX_PLUS_ERROR', $this->user->lang['CODEBOX_PLUS_ERROR_POST_NOT_FOUND']);
 
 			return false;
 		}
@@ -217,18 +215,14 @@ class main
 			}
 			else
 			{
-				$this->template->assign_vars(array(
-					'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_FILE_EMPTY'],
-				));
+				$this->template->assign_var('S_CODEBOX_PLUS_ERROR', $this->user->lang['CODEBOX_PLUS_ERROR_FILE_EMPTY']);
 
 				return false;
 			}
 		}
 		else
 		{
-			$this->template->assign_vars(array(
-				'CODEBOX_PLUS_ERROR'		=> $this->user->lang['CODEBOX_PLUS_ERROR_CODE_NOT_FOUND'],
-			));
+			$this->template->assign_var('S_CODEBOX_PLUS_ERROR', $this->user->lang['CODEBOX_PLUS_ERROR_CODE_NOT_FOUND']);
 
 			return false;
 		}
@@ -236,12 +230,17 @@ class main
 		// RESPOND
 		header('Content-Type: application/force-download');
 		header('Content-Length: ' . strlen($code));
-		header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 		header('Content-Disposition: attachment; filename="' . $filename . '"');
+		header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: public');
+		
+		$this->template->assign_vars(array(
+			'S_CODEBOX_PLUS_DOWNLOAD_INFO'				=> true,
+			'S_CODEBOX_PLUS_DOWNLOAD_INFO_CONTENT'		=> $code,
+		));
 
-		echo $code;
+		return true;
 	}
 	
 	// From main_listener.php
