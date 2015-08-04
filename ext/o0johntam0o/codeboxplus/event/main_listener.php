@@ -228,7 +228,7 @@ class main_listener implements EventSubscriberInterface
 		if ($this->syntax_highlighting_enabled)
 		{
 			// GeSHi
-			$geshi = new \o0johntam0o\codeboxplus\includes\geshi\GeSHi();
+			$geshi = new \o0johntam0o\codeboxplus\includes\geshi\geshi();
 			$geshi->GeSHi($code, $lang);
 			$geshi->set_header_type(GESHI_HEADER_DIV);
 			$geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
