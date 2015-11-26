@@ -28,6 +28,8 @@ $lang = array_merge($lang, array(
 	'CODEBOX_PLUS_WARNING'						=> 'ÄRA MUUDA BBKOODI [CODEBOX=]',
 	'CODEBOX_PLUS_SYNTAX_HIGHLIGHTING'			=> 'Luba süntaks rõhutades',
 	'CODEBOX_PLUS_SYNTAX_HIGHLIGHTING_EXPLAIN'	=> '',
+        'CODEBOX_PLUS_EXPANDED'                          => 'Laienda',
+        'CODEBOX_PLUS_EXPANDED_EXPLAIN'          => '',
 	'CODEBOX_PLUS_ENABLE_DOWNLOAD'				=> 'Luba allalaadimise funktsioon',
 	'CODEBOX_PLUS_ENABLE_DOWNLOAD_EXPLAIN'		=> '',
 	'CODEBOX_PLUS_LOGIN_REQUIRED'				=> 'Allalaadimiseks peab olema sisselogitud',

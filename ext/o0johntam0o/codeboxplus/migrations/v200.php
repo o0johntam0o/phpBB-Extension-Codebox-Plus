@@ -24,6 +24,7 @@ class v200 extends \phpbb\db\migration\migration
 			array('config.add', array('codebox_plus_version', '2.0.0')),
 			
 			array('config.add', array('codebox_plus_syntax_highlighting', 1)),
+			array('config.add', array('codebox_plus_expanded', 0)),
 			array('config.add', array('codebox_plus_download', 1)),
 			array('config.add', array('codebox_plus_login_required', 0)),
 			array('config.add', array('codebox_plus_prevent_bots', 1)),

@@ -19,6 +19,15 @@
 				<label for="codebox_plus_enable_no"> {L_NO}</label>
 			</dd>
 		</dl>
+                <dl>
+                        <dt><label>{L_CODEBOX_PLUS_EXPANDED}</label><br /><span>{L_CODEBOX_PLUS_EXPANDED_EXPLAIN}</span></dt>
+                        <dd>
+                                <input type="radio" class="radio" name="codebox_plus_expanded" value="1" id="codebox_plus_expanded_yes"<!-- IF S_CODEBOX_PLUS_EXPANDED --> checked="checked"<!-- ENDIF --> />
+                                <label for="codebox_plus_expanded_yes"> {L_YES}</label>
+                                <input type="radio" class="radio" name="codebox_plus_expanded" value="0" id="codebox_plus_expanded_no"<!-- IF not S_CODEBOX_PLUS_EXPANDED --> checked="checked"<!-- ENDIF --> />
+                                <label for="codebox_plus_expanded_no"> {L_NO}</label>
+                        </dd>
+                </dl>
 		<dl>
 			<dt><label>{L_CODEBOX_PLUS_ENABLE_DOWNLOAD}</label><br /><span>{L_CODEBOX_PLUS_ENABLE_DOWNLOAD_EXPLAIN}</span></dt>
 			<dd>

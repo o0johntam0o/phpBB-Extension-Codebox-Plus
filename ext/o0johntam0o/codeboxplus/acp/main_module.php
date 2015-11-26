@@ -57,6 +57,7 @@ class main_module
 			}
 			
 			$this->config->set('codebox_plus_syntax_highlighting', $request->variable('codebox_plus_syntax_highlighting', 0));
+                        $this->config->set('codebox_plus_expanded', $request->variable('codebox_plus_expanded', 0));
 			$this->config->set('codebox_plus_download', $request->variable('codebox_plus_download', 0));
 			$this->config->set('codebox_plus_login_required', $request->variable('codebox_plus_login_required', 0));
 			$this->config->set('codebox_plus_prevent_bots', $request->variable('codebox_plus_prevent_bots', 0));
@@ -71,6 +72,7 @@ class main_module
 			'U_ACTION'									=> $this->u_action,
 			'S_CODEBOX_PLUS_VERSION'					=> isset($this->config['codebox_plus_version']) ? $this->config['codebox_plus_version'] : 0,
 			'S_CODEBOX_PLUS_SYNTAX_HIGHLIGHTING'		=> isset($this->config['codebox_plus_syntax_highlighting']) ? $this->config['codebox_plus_syntax_highlighting'] : 0,
+                        'S_CODEBOX_PLUS_EXPANDED'                                       => isset($this->config['codebox_plus_expanded']) ? $this->config['codebox_plus_expanded'] : 0,
 			'S_CODEBOX_PLUS_DOWNLOAD'					=> isset($this->config['codebox_plus_download']) ? $this->config['codebox_plus_download'] : 0,
 			'S_CODEBOX_PLUS_LOGIN_REQUIRED'				=> isset($this->config['codebox_plus_login_required']) ? $this->config['codebox_plus_login_required'] : 0,
 			'S_CODEBOX_PLUS_PREVENT_BOTS'				=> isset($this->config['codebox_plus_prevent_bots']) ? $this->config['codebox_plus_prevent_bots'] : 0,

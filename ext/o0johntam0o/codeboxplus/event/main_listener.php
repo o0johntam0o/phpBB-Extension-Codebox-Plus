@@ -31,6 +31,7 @@ class main_listener implements EventSubscriberInterface
 	protected $php_ext;
 	
 	protected $syntax_highlighting_enabled;
+	protected $expanded;
 	protected $download_enabled;
 	protected $find;
 	protected $find_code;
@@ -47,6 +48,7 @@ class main_listener implements EventSubscriberInterface
 		$this->php_ext = $php_ext;
 		
 		$this->syntax_highlighting_enabled = isset($this->config['codebox_plus_syntax_highlighting']) ? $this->config['codebox_plus_syntax_highlighting'] : 0;
+		$this->expanded = isset($this->config['codebox_plus_expanded']) ? $this->config['codebox_plus_expanded'] : 0;
 		$this->download_enabled = isset($this->config['codebox_plus_download']) ? $this->config['codebox_plus_download'] : 0;
 	}
 	
@@ -193,7 +195,7 @@ class main_listener implements EventSubscriberInterface
 		}
 		
 		$re .= '</div>';
-		$re .= '<div><div style="display: ' . (($lang != 'NULL') ? 'none' : 'inline') . ';">';
+		$re .= '<div><div style="display: ' . (($lang != 'NULL' && !$this->expanded) ? 'none' : 'inline') . ';">';
 		
 		if ($lang != 'NULL')
 		{
