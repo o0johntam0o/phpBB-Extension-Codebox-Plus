@@ -28,6 +28,8 @@ $lang = array_merge($lang, array(
 	'CODEBOX_PLUS_WARNING'						=> 'KHÔNG ĐƯỢC CHỈNH SỬA BBCODE [CODEBOX=]',
 	'CODEBOX_PLUS_SYNTAX_HIGHLIGHTING'			=> 'Kích hoạt chức năng làm nổi bật cú pháp',
 	'CODEBOX_PLUS_SYNTAX_HIGHLIGHTING_EXPLAIN'	=> '',
+        'CODEBOX_PLUS_EXPANDED'                          => 'Mở rộng',
+        'CODEBOX_PLUS_EXPANDED_EXPLAIN'          => '',
 	'CODEBOX_PLUS_ENABLE_DOWNLOAD'				=> 'Kích hoạt chức năng tải về',
 	'CODEBOX_PLUS_ENABLE_DOWNLOAD_EXPLAIN'		=> '',
 	'CODEBOX_PLUS_LOGIN_REQUIRED'				=> 'Yêu cầu đăng nhập để tải về',

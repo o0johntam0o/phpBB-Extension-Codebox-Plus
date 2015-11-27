@@ -28,6 +28,8 @@ $lang = array_merge($lang, array(
 	'CODEBOX_PLUS_WARNING'						=> 'NO MODIFIQUE EL BBCODE [CODEBOX=]',
 	'CODEBOX_PLUS_SYNTAX_HIGHLIGHTING'			=> 'Habilitar syntax highlighting',
 	'CODEBOX_PLUS_SYNTAX_HIGHLIGHTING_EXPLAIN'	=> '',
+        'CODEBOX_PLUS_EXPANDED'                          => 'Expandir',
+        'CODEBOX_PLUS_EXPANDED_EXPLAIN'          => '',
 	'CODEBOX_PLUS_ENABLE_DOWNLOAD'				=> 'Habilitar función de descarga',
 	'CODEBOX_PLUS_ENABLE_DOWNLOAD_EXPLAIN'		=> '',
 	'CODEBOX_PLUS_LOGIN_REQUIRED'				=> 'Requiere identificaión para descargar',

@@ -31,6 +31,7 @@ class main_listener implements EventSubscriberInterface
 	protected $php_ext;
 	
 	protected $syntax_highlighting_enabled;
+	protected $expanded;
 	protected $download_enabled;
 	protected $find;
 	protected $find_code;
@@ -47,6 +48,7 @@ class main_listener implements EventSubscriberInterface
 		$this->php_ext = $php_ext;
 		
 		$this->syntax_highlighting_enabled = isset($this->config['codebox_plus_syntax_highlighting']) ? $this->config['codebox_plus_syntax_highlighting'] : 0;
+		$this->expanded = isset($this->config['codebox_plus_expanded']) ? $this->config['codebox_plus_expanded'] : 0;
 		$this->download_enabled = isset($this->config['codebox_plus_download']) ? $this->config['codebox_plus_download'] : 0;
 	}
 	
@@ -58,6 +60,7 @@ class main_listener implements EventSubscriberInterface
             'core.posting_modify_template_vars'			=> 'posting_event',
             'core.viewtopic_post_rowset_data'			=> 'viewtopic_event',
             'core.modify_format_display_text_after'		=> 'message_parser_event',
+            'core.modify_text_for_display_after'		=> 'message_parser_event',
         );
     }
 	
@@ -88,7 +91,9 @@ class main_listener implements EventSubscriberInterface
 		if (isset($event['text']))
 		{
 			$text = $event['text'];
-			$text = preg_replace('#' . preg_quote('<div class="codebox" title="' . $this->user->lang['CODEBOX_PLUS_TITLE'] . '"><p>') . '.*?' . preg_quote('</code></div>') . '#msi', $this->codebox_template('NULL', 'NULL'), $text);
+			$post_id = 0;
+			$part = 0;
+			$text = preg_replace('#<div class="codebox" title="' . preg_quote($this->user->lang['CODEBOX_PLUS_TITLE']) . '" data-language="(.*?)" data-filename="(.*?)"><p>.*?</p><code>(.*?)</code></div>#msie', "\$this->codebox_template(preg_replace('#\<br\\s*/?\>#msi', '\n', '\$3'), '\$1', '\$2', \$post_id, ++\$part)", $text);
 			$event['text'] = $text;
 		}
     }
@@ -129,12 +134,7 @@ class main_listener implements EventSubscriberInterface
 			$bbcode_uid = isset($rowset_data['bbcode_uid']) ? $rowset_data['bbcode_uid'] : '';
 			$post_id = isset($rowset_data['post_id']) ? $rowset_data['post_id'] : 0;
 			$part = 0;
-			
-			while (preg_match("#\[codebox=[a-z0-9_-]+ file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msi", $post_text))
-			{
-				$part++;
-				$post_text = preg_replace("#\[codebox=([a-z0-9_-]+) file=(.*?):" . $bbcode_uid . "\](.*?)\[/codebox:" . $bbcode_uid . "\]#msie", "\$this->codebox_template('\$3', '\$1', '\$2', \$post_id, \$part)", $post_text, 1);
-			}
+			$post_text = preg_replace("#\[codebox=(.*?) file=(.*?):$bbcode_uid\](.*?)\[/codebox:$bbcode_uid\]#msie", "\$this->codebox_template('\$3', '\$1', '\$2', \$post_id, ++\$part)", $post_text);
 			
 			if (isset($rowset_data['post_text']) && $part > 0)
 			{
@@ -186,14 +186,14 @@ class main_listener implements EventSubscriberInterface
 		$re .= '<a href="#" onclick="codebox_plus_select(this, 1); return false;">[' . $this->user->lang['SELECT_ALL_CODE'] . ']</a>';
 		$re .= '&nbsp;<a href="#" onclick="codebox_plus_toggle(this, 1); return false;">[' . $this->user->lang['CODEBOX_PLUS_EXPAND'] . '/' . $this->user->lang['CODEBOX_PLUS_COLLAPSE'] . ']</a>';
 		
-		if ($this->download_enabled && $lang != 'NULL')
+		if ($id != 0 && $this->download_enabled && $lang != 'NULL')
 		{
 			$re .= '&nbsp;<a href="' . $this->helper->route('o0johntam0o_codeboxplus_download_controller', array('id' => $id, 'part' => $part)) . '" onclick="window.open(this.href); return false;">';
 			$re .= '[' . $this->user->lang['CODEBOX_PLUS_DOWNLOAD'] . ']</a> ' . '('. $file . ')';
 		}
 		
 		$re .= '</div>';
-		$re .= '<div><div style="display: ' . (($lang != 'NULL') ? 'none' : 'inline') . ';">';
+		$re .= '<div><div style="display: ' . (($lang != 'NULL' && !$this->expanded) ? 'none' : 'inline') . ';">';
 		
 		if ($lang != 'NULL')
 		{
@@ -219,10 +219,14 @@ class main_listener implements EventSubscriberInterface
 		{
 			return '';
 		}
-		// Remove newline at the beginning
+		// Remove newline at the beginning and ending
 		if (!empty($code) && $code[0] == "\n")
 		{
 			$code = substr($code, 1);
+		}
+		if (!empty($code) && substr($code, -1) == "\n")
+		{
+			$code = substr($code, 0, -1);
 		}
 		
 		if ($this->syntax_highlighting_enabled)
