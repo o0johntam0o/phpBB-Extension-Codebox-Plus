@@ -24,3 +24,16 @@
 	display: block;
 	text-align: right;
 }
+
+/* For MS Edge */
+@supports (-ms-accelerator:true) {
+	.codebox_plus_wrap li
+	{
+		display: block;
+	}
+
+	.codebox_plus_wrap li>div
+	{
+		display: inline;
+	}
+}
