@@ -93,7 +93,13 @@ class main_listener implements EventSubscriberInterface
 			$text = $event['text'];
 			$post_id = 0;
 			$part = 0;
-			$text = preg_replace('#<div class="codebox" title="' . preg_quote($this->user->lang['CODEBOX_PLUS_TITLE']) . '" data-language="(.*?)" data-filename="(.*?)"><p>.*?</p><code>(.*?)</code></div>#msie', "\$this->codebox_template(preg_replace('#\<br\\s*/?\>#msi', '\n', '\$3'), '\$1', '\$2', \$post_id, ++\$part)", $text);
+			$text = preg_replace_callback('#<div class="codebox" title="' . preg_quote($this->user->lang['CODEBOX_PLUS_TITLE']) . '" data-language="(.*?)" data-filename="(.*?)"><p>.*?</p><code>(.*?)</code></div>#msi',
+						function ($arg) use ($post_id, &$part)
+						{
+							return $this->codebox_template(preg_replace('#\<br\\s*/?\>#msi', "\n", $arg[3]), $arg[1], $arg[2], $post_id, ++$part);
+						},
+						$text);
+			//$text = preg_replace('#<div class="codebox" title="' . preg_quote($this->user->lang['CODEBOX_PLUS_TITLE']) . '" data-language="(.*?)" data-filename="(.*?)"><p>.*?</p><code>(.*?)</code></div>#msie', "\$this->codebox_template(preg_replace('#\<br\\s*/?\>#msi', '\n', '\$3'), '\$1', '\$2', \$post_id, ++\$part)", $text);
 			$event['text'] = $text;
 		}
     }
@@ -134,7 +140,13 @@ class main_listener implements EventSubscriberInterface
 			$bbcode_uid = isset($rowset_data['bbcode_uid']) ? $rowset_data['bbcode_uid'] : '';
 			$post_id = isset($rowset_data['post_id']) ? $rowset_data['post_id'] : 0;
 			$part = 0;
-			$post_text = preg_replace("#\[codebox=(.*?) file=(.*?):$bbcode_uid\](.*?)\[/codebox:$bbcode_uid\]#msie", "\$this->codebox_template('\$3', '\$1', '\$2', \$post_id, ++\$part)", $post_text);
+			$post_text = preg_replace_callback("#\[codebox=(.*?) file=(.*?):$bbcode_uid\](.*?)\[/codebox:$bbcode_uid\]#msi",
+							function ($arg) use ($post_id, &$part)
+							{
+								return $this->codebox_template($arg[3], $arg[1], $arg[2], $post_id, ++$part);
+							},
+							$post_text);
+			//$post_text = preg_replace("#\[codebox=(.*?) file=(.*?):$bbcode_uid\](.*?)\[/codebox:$bbcode_uid\]#msie", "\$this->codebox_template('\$3', '\$1', '\$2', \$post_id, ++\$part)", $post_text);
 			
 			if (isset($rowset_data['post_text']) && $part > 0)
 			{
@@ -158,7 +170,13 @@ class main_listener implements EventSubscriberInterface
 			$message = $data['message'];
 			$bbcode_uid = $data['bbcode_uid'];
 			// MODIFY
-			$message = preg_replace("#(\[codebox=[a-z0-9_-]+ file=(?:.*?):" . $bbcode_uid . "\])(.*?)(\[/codebox:" . $bbcode_uid . "\])#msie", "'\$1' . \$this->codebox_clean_code('\$2', \$bbcode_uid) . '\$3'", $message);
+			$message = preg_replace_callback("#(\[codebox=[a-z0-9_-]+ file=(?:.*?):" . $bbcode_uid . "\])(.*?)(\[/codebox:" . $bbcode_uid . "\])#msi",
+							function ($arg) use ($bbcode_uid)
+							{
+								return $arg[1] . $this->codebox_clean_code($arg[2], $bbcode_uid) . $arg[3];
+							},
+							$message);
+			//$message = preg_replace("#(\[codebox=[a-z0-9_-]+ file=(?:.*?):" . $bbcode_uid . "\])(.*?)(\[/codebox:" . $bbcode_uid . "\])#msie", "'\$1' . \$this->codebox_clean_code('\$2', \$bbcode_uid) . '\$3'", $message);
 			// RETURN
 			$data['message'] = $message;
 			$event['data'] = $data;
