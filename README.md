@@ -23,7 +23,7 @@ Codebox Plus alows you to:
 
 ## Requirement
 
-phpbb: 3.1.x
+phpbb: 3.2.x
 
 ## Installation
 

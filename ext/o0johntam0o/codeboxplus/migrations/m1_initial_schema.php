@@ -10,18 +10,17 @@
 
 namespace o0johntam0o\codeboxplus\migrations;
 
-class v200 extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return isset($this->config['codebox_plus_version']) && version_compare($this->config['codebox_plus_version'], '2.0.0', '>=');
+		return isset($this->config['codebox_plus_version']) && version_compare($this->config['codebox_plus_version'], '3.0.0', '>=');
 	}
 	
 	// INSTALL ==============================================================
 	public function update_data()
 	{
 		return array(
-			array('config.add', array('codebox_plus_version', '2.0.0')),
+			array('config.add', array('codebox_plus_version', '3.0.0')),
 			
 			array('config.add', array('codebox_plus_syntax_highlighting', 1)),
 			array('config.add', array('codebox_plus_expanded', 0)),
@@ -87,7 +86,7 @@ class v200 extends \phpbb\db\migration\migration
 					'bbcode_match'			=> '[Codebox={SIMPLETEXT1} file={SIMPLETEXT2}]{TEXT}[/Codebox]',
 					'bbcode_tpl'			=> '<div class="codebox" title="{L_CODEBOX_PLUS_TITLE}" data-language="{SIMPLETEXT1}" data-filename="{SIMPLETEXT2}"><p>{L_CODE}{L_COLON} <a href="#" onclick="selectCode(this); return false;">{L_SELECT_ALL_CODE}</a></p><code>{TEXT}</code></div>',
 					'first_pass_match'		=> '!\[codebox\=([a-zA-Z0-9-+.,_ ]+) file\=([a-zA-Z0-9-+.,_ ]+)\](.*?)\[/codebox\]!ies',
-					'first_pass_replace'	=> '\'[codebox=${1} file=${2}:$uid]\'.str_replace(array("\\r\\n", \'\\"\', \'\\\'\', \'(\', \')\'), array("\\n", \'"\', \'&#39;\', \'&#40;\', \'&#41;\'), \'${3}\').\'[/codebox:$uid]\'',
+					'first_pass_replace'	=> '\'[codebox=${1} file=${2}:$uid]\'.str_replace(array("\\r\\n", \'\\"\', \'\\\'\', \'(\', \')\'), array("\\n", \'"\', \'&#39;\', \'&#40;\', \'&#41;\'), trim(\'${3}\')).\'[/codebox:$uid]\'',
 					'second_pass_match'		=> '!\[codebox\=([a-zA-Z0-9-+.,_ ]+) file\=([a-zA-Z0-9-+.,_ ]+):$uid\](.*?)\[/codebox:$uid\]!s',
 					'second_pass_replace'	=> '<div class="codebox" title="{L_CODEBOX_PLUS_TITLE}" data-language="${1}" data-filename="${2}"><p>{L_CODE}{L_COLON} <a href="#" onclick="selectCode(this); return false;">{L_SELECT_ALL_CODE}</a></p><code>${3}</code></div>'
 				)
