@@ -1,0 +1,32 @@
+<?php
+	$name = 'phpBB Codebox Plus extension';
+	$version = '2.0.0';
+	$changes = array(
+		'A'	=> 'Change 1',
+		'B'	=> 'Change 2',
+	);
+	
+	echo "$name $version";
+	var_dump($changes);
+
+	/*
+	Special characters: `~!@#$%^&*()-_=+[]{};:'"\|/?,.<>
+	Tab: >	<
+	Smilies:  :D  :)  ;) 
+	[b]Bold[/b]
+	[i]Italic[/i]
+	[u]Underline[/u]
+	[quote]Quote[/quote]
+	[quote="o0johntam0o"]Quote by[/quote]
+	[code]Code[/code]
+	[code=php]Echo "PHP code";[/code]
+	[img]https://www.phpbb.com/image.png[/img]
+	[url]https://www.phpbb.com[/url]
+	[url=https://www.phpbb.com]phpBB[/url]
+	[flash=200,50]https://www.phpbb.com/flash.swf[/flash]
+	[size=150]Font size[/size]
+	[color=#0000FF]Font color[/color]
+	[list][*]List item 1[/*][*]List item 2[/*][/list]
+	[list=a][*]List item 1[/*][*]List item 2[/*][/list]
+	*/
+?>
