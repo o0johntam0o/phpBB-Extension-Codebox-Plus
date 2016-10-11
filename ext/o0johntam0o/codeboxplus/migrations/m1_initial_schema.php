@@ -10,6 +10,7 @@
 
 namespace o0johntam0o\codeboxplus\migrations;
 
+class m1_initial_schema extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
